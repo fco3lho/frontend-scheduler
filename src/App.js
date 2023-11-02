@@ -1,11 +1,14 @@
+import React from 'react';
 import './App.css';
+import FifoSimulator from './components/FifoSimulator/FifoSimulator';
 
-function App() {
+const App = () => {
   return (
     <div className="App">
-      Hello
+      <h1>Simulação FIFO</h1>
+      <FifoSimulator />
     </div>
   );
-}
+};
 
 export default App;

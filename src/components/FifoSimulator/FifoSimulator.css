@@ -1,0 +1,9 @@
+.process-container {
+  display: flex;
+}
+
+button{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
