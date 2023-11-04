@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import "./FIFO.css";
-
 import Axios from "axios";
 
 const FifoScheduler = () => {

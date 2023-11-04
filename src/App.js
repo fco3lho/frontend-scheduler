@@ -1,12 +1,29 @@
-import React from 'react';
-import "./App.css"
-import FIFO from './components/FIFO/FIFO';
+import React from "react";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+
+//CSS
+import "./App.css";
+
+//Pages
+import FIFO from "./pages/FIFO/FIFO";
+import FairShare from "./pages/FairShare/FairShare";
+import Lottery from "./pages/Lottery/Lottery";
+import PriorityQueues from "./pages/PriorityQueues/PriorityQueues";
+import ShortestJobFirst from "./pages/ShortestJobFirst/ShortestJobFirst";
 
 const App = () => {
   return (
-    <div className="App">
-      <FIFO />
-    </div>
+    <BrowserRouter>
+      <div className="App">
+        <Routes>
+          <Route path="/fifo" element={<FIFO/>}/>
+          <Route path="/fairShare" element={<FairShare/>}/>
+          <Route path="/lottery" element={<Lottery/>}/>
+          <Route path="/priorityQueues" element={<PriorityQueues/>}/>
+          <Route path="/shortestJobFirst" element={<ShortestJobFirst/>}/>
+        </Routes>
+      </div>
+    </BrowserRouter>
   );
 };
 
