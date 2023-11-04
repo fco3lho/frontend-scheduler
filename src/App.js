@@ -1,12 +1,11 @@
 import React from 'react';
-import './App.css';
-import FifoScheduler from './components/FifoScheduler/FifoScheduler';
+import "./App.css"
+import FIFO from './components/FIFO/FIFO';
 
 const App = () => {
   return (
-    <div className="app">
-      <h1>Simulação FIFO Scheduler</h1>
-      <FifoScheduler />
+    <div className="App">
+      <FIFO />
     </div>
   );
 };
