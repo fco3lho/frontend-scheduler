@@ -26,8 +26,8 @@
     position: relative;
     line-height: 125%;
     font-weight: 600;
-    text-decoration: none; /* Remove the underline */
-    color: var(--your-text-color); /* Change the text color */
+    text-decoration: none;
+    color: #ffffff;
 }
 
 .frame-group,
@@ -50,13 +50,34 @@
     transition: background-color 0.2s, transform 0.2s; /* Add a transition effect */
 }
 
+.frame-group-sjf {
+    display: flex;
+    margin-top: 12px;
+    align-items: center;
+    border-radius: var(--br-5xs);
+    background-color: var(--tailwind-green-600);
+    width: 236px;
+    height: 52px;
+    flex-direction: row;
+    justify-content: center;
+    gap: var(--gap-xs);
+    text-align: left;
+    font-size: var(--font-size-base);
+    transition: background-color 0.2s, transform 0.2s; /* Add a transition effect */
+}
+
+.frame-group-sjf:hover {
+    background-color: var(--tailwind-green-600); /* Change the background color on hover */
+    transform: scale(1.05); /* Grow on hover */
+}
+
 .frame-group:hover {
     background-color: var(--tailwind-green-600); /* Change the background color on hover */
     transform: scale(1.05); /* Grow on hover */
 }
 .frame-parent {
     position: absolute;
-    top: 159px;
+    top: 120px;
     left: 88px;
     border-radius: var(--br-base);
     background-color: var(--color-darkslategray);
@@ -75,7 +96,7 @@
 }
 .frame-container {
     position: absolute;
-    top: 159px;
+    top: 120px;
     left: 529px;
     border-radius: var(--br-base);
     background-color: var(--color-darkslategray);
@@ -90,6 +111,7 @@
 }
 .image-2-icon {
     position: relative;
+    margin-top: 4px;
     width: 141px;
     height: 118px;
     object-fit: cover;
@@ -109,13 +131,13 @@
     gap: var(--gap-13xl);
 }
 .frame-parent3 {
-    top: 165px;
+    top: 120px;
     left: 970px;
     height: 347px;
     box-sizing: border-box;
 }
 .frame-parent5 {
-    top: 579px;
+    top: 520px;
     left: 334px;
 }
 .fair-share-1-icon,
@@ -131,7 +153,7 @@
 }
 .frame-parent9 {
     position: absolute;
-    top: 581px;
+    top: 520px;
     left: 763px;
     border-radius: var(--br-base);
     background-color: var(--color-darkslategray);
@@ -152,9 +174,9 @@
     top: 63px;
     left: 533px;
 }
-.simulador-de-escalonadoress {
+.title {
     position: absolute;
-    top: 45px;
+    top: 20px;
     left: 225px;
     font-size: 48px;
     line-height: 160%;
