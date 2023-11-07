@@ -1,4 +1,6 @@
 import React from "react";
+
+//Hooks
 import { useState } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
@@ -13,16 +15,7 @@ import Lottery from "./pages/Lottery/Lottery";
 import PriorityQueues from "./pages/PriorityQueues/PriorityQueues";
 import ShortestJobFirst from "./pages/ShortestJobFirst/ShortestJobFirst";
 
-import GraficoHorizontal from "./graficoFifo";
-
 const App = () => {
-  const [processos, setProcessos] = useState([
-    { tempoExecucao: 10 },
-    { tempoExecucao: 5 },
-    { tempoExecucao: 8 },
-    { tempoExecucao: 12 },
-  ]);
-
   return (
     <BrowserRouter>
       <div className="App">
@@ -34,8 +27,6 @@ const App = () => {
           <Route path="/priorityQueues" element={<PriorityQueues />} />
           <Route path="/shortestJobFirst" element={<ShortestJobFirst />} />
         </Routes>
-        {/* <h1>Escalonador FIFO</h1>
-        <GraficoHorizontal processos={processos} /> */}
       </div>
     </BrowserRouter>
   );
