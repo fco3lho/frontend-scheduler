@@ -147,11 +147,19 @@ const FifoScheduler = () => {
         </div>
       </Link>
 
+      <h1 className="totalTime">
+        <strong>Tempo total:</strong> {totalTime}
+      </h1>
+
       <div className="element-container">
         {processes.map((process, index) => (
           <div
             className={
-              selectedProcess === process.id ? "element_selected" : "element"
+              process.ended
+                ? "element_finished"
+                : selectedProcess === process.id
+                ? "element_selected"
+                : "element"
             }
             key={index}
           >
@@ -163,9 +171,6 @@ const FifoScheduler = () => {
             </p>
             <p>
               <strong>Tempo do processo:</strong> {process.time}
-            </p>
-            <p>
-              <strong>Tempo total:</strong> {totalTime}
             </p>
           </div>
         ))}

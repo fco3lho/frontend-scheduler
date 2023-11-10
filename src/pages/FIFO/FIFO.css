@@ -1,17 +1,30 @@
 .element{
-  background: #444;
+  background: #bd0101;
   margin: 20px;
   padding: 10px;
 }
 
 .element_selected{
-  background: rgb(2, 139, 52);
+  background: rgb(192, 206, 1);
   margin: 20px;
   padding: 10px;
 }
 
-.element-container {
+.element_finished{
+  background: rgb(18, 206, 1);
+  margin: 20px;
+  padding: 10px;
+}
+
+.totalTime{
   margin-top: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.element-container {
+  margin-top: 20px;
   display: flex;
   flex-wrap: wrap;
 }
@@ -81,13 +94,12 @@
   overflow: hidden;
   padding: var(--padding-10xl) var(--padding-29xl);
   top: 5.69rem;
-  left: 39.25rem;
+  left: 52rem;
   border-radius: 8px;
   background-color: #16a34a;
   width: 6.56rem;
   height: .02rem;
   display: flex;
-  flex-direction: row;
   align-items: center;
   justify-content: center;
   gap: 0.75rem;
