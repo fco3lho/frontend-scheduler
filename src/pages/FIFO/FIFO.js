@@ -10,9 +10,9 @@ import Axios from "axios";
 
 const FifoScheduler = () => {
   const [processes, setProcesses] = useState([]);
+  const [totalTime, setTotalTime] = useState(0);
   const [selectedProcess, setSelectedProcess] = useState();
   let numberOfProcesses = 0;
-  let totalTime = 0;
   let scheduleQuantum = 100;
 
   let finishedProcesses = [];
@@ -81,8 +81,6 @@ const FifoScheduler = () => {
   };
 
   const handleSimulate = async () => {
-    totalTime = 0;
-
     //Seleciona processo para executar
     for (var i = 0; i < numberOfProcesses; i++) {
       //Gasta o quantum do escalonador para executar o processo
@@ -99,8 +97,8 @@ const FifoScheduler = () => {
         //Se o processo não foi concluído, continua a ser processado
         else if (!processes[i].ended) {
           setSelectedProcess(processes[i].id);
-          totalTime = totalTime + 1;
           increaseProcessTick(i + 1);
+          setTotalTime(prevTotalTime => prevTotalTime + 1)
         }
       }
 
@@ -148,7 +146,7 @@ const FifoScheduler = () => {
       </Link>
 
       <h1 className="totalTime">
-        <strong>Tempo total:</strong> {totalTime}
+        <strong>Tempo total:</strong> {totalTime} ms
       </h1>
 
       <div className="element-container">
