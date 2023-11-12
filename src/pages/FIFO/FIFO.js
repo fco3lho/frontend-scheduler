@@ -5,6 +5,9 @@ import homeIcon from "./vector.svg";
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
+//Components
+import BlockProcess from "../../components/BlockProcess/BlockProcess";
+
 //Axios
 import Axios from "axios";
 
@@ -98,7 +101,7 @@ const FifoScheduler = () => {
         else if (!processes[i].ended) {
           setSelectedProcess(processes[i].id);
           increaseProcessTick(i + 1);
-          setTotalTime(prevTotalTime => prevTotalTime + 1)
+          setTotalTime((prevTotalTime) => prevTotalTime + 1);
         }
       }
 
@@ -151,26 +154,13 @@ const FifoScheduler = () => {
 
       <div className="element-container">
         {processes.map((process, index) => (
-          <div
-            className={
-              process.ended
-                ? "element_finished"
-                : selectedProcess === process.id
-                ? "element_selected"
-                : "element"
-            }
-            key={index}
-          >
-            <p>
-              <strong>Process ID:</strong> {process.id}
-            </p>
-            <p>
-              <strong>Finished:</strong> {process.ended ? <>Yes</> : <>No</>}
-            </p>
-            <p>
-              <strong>Tempo do processo:</strong> {process.time}
-            </p>
-          </div>
+          <BlockProcess
+            key={process.id}
+            id={process.id}
+            ended={process.ended}
+            time={process.time}
+            selectedProcess={selectedProcess}
+          />
         ))}
       </div>
     </div>

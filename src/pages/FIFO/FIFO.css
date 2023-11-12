@@ -1,21 +1,3 @@
-.element{
-  background: #bd0101;
-  margin: 20px;
-  padding: 10px;
-}
-
-.element_selected{
-  background: rgb(192, 206, 1);
-  margin: 20px;
-  padding: 10px;
-}
-
-.element_finished{
-  background: rgb(18, 206, 1);
-  margin: 20px;
-  padding: 10px;
-}
-
 .totalTime{
   margin-top: 200px;
   display: flex;
