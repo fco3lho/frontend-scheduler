@@ -18,6 +18,8 @@ const FifoScheduler = () => {
   const [numberOfProcesses, setNumberOfProcesses] = useState(0);
   const [processes, setProcesses] = useState([]);
 
+  const [selectedProcess, setSelectedProcess] = useState();
+
   function sleep(ms) {
     return new Promise((resolve) => setTimeout(resolve, ms));
   }
@@ -33,6 +35,32 @@ const FifoScheduler = () => {
 
     setNumberOfProcesses(arrayIDs.length);
   }
+
+  const changeSpecificProcess = (index) => {
+    const arrayProcesses = [...processes];
+
+    arrayProcesses[simulation[index].processID - 1].processID =
+      simulation[index].processID;
+    arrayProcesses[simulation[index].processID - 1].action =
+      simulation[index].action;
+    arrayProcesses[simulation[index].processID - 1].execTimeIteration =
+      simulation[index].execTimeIteration;
+    arrayProcesses[simulation[index].processID - 1].idleTimeIteration =
+      simulation[index].idleTimeIteration;
+    arrayProcesses[simulation[index].processID - 1].processEnded =
+      simulation[index].processEnded;
+    arrayProcesses[simulation[index].processID - 1].processTimeRemaining =
+      simulation[index].processTimeRemaining;
+    arrayProcesses[simulation[index].processID - 1].quantum =
+      simulation[index].quantum;
+    arrayProcesses[simulation[index].processID - 1].totalExecTime =
+      simulation[index].totalExecTime;
+    arrayProcesses[simulation[index].processID - 1].totalIdleTime =
+      simulation[index].totalIdleTime;
+
+    setSelectedProcess(simulation[index].processID);
+    setProcesses(arrayProcesses);
+  };
 
   useEffect(() => {
     Axios.get("http://localhost:3001/api/firstInFirstOut")
@@ -66,7 +94,11 @@ const FifoScheduler = () => {
   }, [numberOfProcesses]);
 
   const handleSimulate = async () => {
-     console.log(processes);
+    for (let i = 0; i < simulation.length; i++) {
+      await sleep(100);
+      changeSpecificProcess(i);
+      setFullTimeInExecution(simulation[i].fullTimeInExecution);
+    }
   };
 
   return (
@@ -112,6 +144,7 @@ const FifoScheduler = () => {
             processTimeRemaining={process.processTimeRemaining}
             totalExecTime={process.totalExecTime}
             totalIdleTime={process.totalIdleTime}
+            selectedProcess={selectedProcess}
           />
         ))}
       </div>

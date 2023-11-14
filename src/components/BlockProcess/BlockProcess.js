@@ -2,7 +2,15 @@ import "./BlockProcess.css";
 
 const BlockProcess = (props) => {
   return (
-    <div className={props.ended ? "element_finished" : "element"}>
+    <div
+      className={
+        props.ended
+          ? "element_finished"
+          : props.selectedProcess === props.id
+          ? "element_selected"
+          : "element"
+      }
+    >
       <p>
         <strong>Process ID:</strong> {props.id}
       </p>
