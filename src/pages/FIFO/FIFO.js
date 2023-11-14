@@ -12,13 +12,11 @@ import BlockProcess from "../../components/BlockProcess/BlockProcess";
 import Axios from "axios";
 
 const FifoScheduler = () => {
-  const [processes, setProcesses] = useState([]);
-  const [totalTime, setTotalTime] = useState(0);
-  const [selectedProcess, setSelectedProcess] = useState();
-  let numberOfProcesses = 0;
-  let scheduleQuantum = 100;
+  const [simulation, setSimulation] = useState();
+  const [fullTimeInExecution, setFullTimeInExecution] = useState(0);
 
-  let finishedProcesses = [];
+  const [numberOfProcesses, setNumberOfProcesses] = useState(0);
+  const [processes, setProcesses] = useState([]);
 
   function sleep(ms) {
     return new Promise((resolve) => setTimeout(resolve, ms));
@@ -27,99 +25,48 @@ const FifoScheduler = () => {
   function countProcesses(data) {
     const arrayIDs = [];
 
-    for (var i = 0; i < data.length; i++) {
+    for (let i = 0; i < data.length; i++) {
       if (!arrayIDs.includes(data[i].processID)) {
         arrayIDs.push(data[i].processID);
       }
     }
 
-    numberOfProcesses = arrayIDs.length;
+    setNumberOfProcesses(arrayIDs.length);
   }
 
   useEffect(() => {
-    Axios.get("http://localhost:3003/api/firstInFirstOut")
+    Axios.get("http://localhost:3001/api/firstInFirstOut")
       .then((response) => {
         countProcesses(response.data);
-
-        let arrayTemp = [...processes];
-
-        for (var i = 0; i < numberOfProcesses; i++) {
-          arrayTemp.push({
-            id: response.data[i].processID,
-            ended: response.data[i].ended,
-            quantum: response.data[i].totalQuantum,
-            time: 0,
-          });
-
-          if (processes.length < numberOfProcesses) {
-            setProcesses(arrayTemp);
-          }
-        }
+        setSimulation(response.data);
       })
       .catch((error) => {
-        console.error("Error fetching data:", error.response);
+        console.log(error.response.data);
       });
-  }, [processes]);
+  }, []);
 
-  const changeProcessToFinished = (id) => {
-    const newArray = [...processes];
+  useEffect(() => {
+    let arrayProcesses = [];
 
-    const changedObject = newArray.find((object) => object.id === id);
-
-    if (changedObject) {
-      changedObject.ended = true;
-      setProcesses(newArray);
+    for (let i = 0; i < numberOfProcesses; i++) {
+      arrayProcesses.push({
+        processID: i + 1,
+        action: "stopped",
+        execTimeIteration: 0,
+        idleTimeIteration: 0,
+        processEnded: false,
+        processTimeRemaining: 0,
+        quantum: 0,
+        totalExecTime: 0,
+        totalIdleTime: 0,
+      });
     }
-  };
 
-  const increaseProcessTick = (id) => {
-    const newArray = [...processes];
-
-    const changedObject = newArray.find((object) => object.id === id);
-
-    if (changedObject) {
-      changedObject.time = changedObject.time + 1;
-      setProcesses(newArray);
-    }
-  };
+    setProcesses(arrayProcesses);
+  }, [numberOfProcesses]);
 
   const handleSimulate = async () => {
-    //Seleciona processo para executar
-    for (var i = 0; i < numberOfProcesses; i++) {
-      //Gasta o quantum do escalonador para executar o processo
-      for (var j = 0; j < scheduleQuantum; j++) {
-        await sleep(10);
-
-        //Se o tempo executado do processo for maior ou igual ao quantum que o mesmo precisa, ele é finalizado
-        if (processes[i].time >= processes[i].quantum) {
-          if (!finishedProcesses.includes(i)) finishedProcesses.push(i);
-          changeProcessToFinished(i + 1);
-          j = scheduleQuantum;
-          break;
-        }
-        //Se o processo não foi concluído, continua a ser processado
-        else if (!processes[i].ended) {
-          setSelectedProcess(processes[i].id);
-          increaseProcessTick(i + 1);
-          setTotalTime((prevTotalTime) => prevTotalTime + 1);
-        }
-      }
-
-      // Verifica se todos os processos foram executados
-      if (finishedProcesses.length === numberOfProcesses) {
-        console.log("Escalonamento finalizado no tempo de ", totalTime, "ms.");
-        break;
-      }
-
-      // Se todos os processos ainda não foram executados, reexecutar loop
-      if (i == numberOfProcesses - 1) i = 0;
-    }
-
-    console.log(
-      "Array com processos em ordem de finalização: ",
-      finishedProcesses
-    );
-    console.log(processes);
+     console.log(processes);
   };
 
   return (
@@ -149,17 +96,22 @@ const FifoScheduler = () => {
       </Link>
 
       <h1 className="totalTime">
-        <strong>Tempo total:</strong> {totalTime} ms
+        <strong>Tempo total:</strong> {fullTimeInExecution} ms
       </h1>
 
       <div className="element-container">
         {processes.map((process, index) => (
           <BlockProcess
-            key={process.id}
-            id={process.id}
-            ended={process.ended}
-            time={process.time}
-            selectedProcess={selectedProcess}
+            key={index}
+            id={process.processID}
+            ended={process.processEnded}
+            action={process.action}
+            quantum={process.quantum}
+            execTimeIteration={process.execTimeIteration}
+            idleTimeIteration={process.idleTimeIteration}
+            processTimeRemaining={process.processTimeRemaining}
+            totalExecTime={process.totalExecTime}
+            totalIdleTime={process.totalIdleTime}
           />
         ))}
       </div>
