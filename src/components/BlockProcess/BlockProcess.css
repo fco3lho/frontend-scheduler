@@ -1,17 +1,17 @@
 .element{
   background: #bd0101;
-  margin: 20px;
-  padding: 10px;
+  margin: 5px;
+  padding: 5px;
 }
 
 .element_selected{
   background: rgb(206, 203, 1);
-  margin: 20px;
-  padding: 10px;
+  margin: 5px;
+  padding: 5px;
 }
 
 .element_finished{
   background: rgb(18, 206, 1);
-  margin: 20px;
-  padding: 10px;
+  margin: 5px;
+  padding: 5px;
 }
