@@ -7,7 +7,9 @@ const BlockProcess = (props) => {
         props.ended
           ? "element_finished"
           : props.selectedProcess === props.id
-          ? "element_selected"
+          ? props.execTimeIteration > 0
+            ? "element_exec"
+            : "element_idle"
           : "element"
       }
     >

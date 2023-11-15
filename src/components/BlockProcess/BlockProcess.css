@@ -4,8 +4,14 @@
   padding: 5px;
 }
 
-.element_selected{
-  background: rgb(206, 203, 1);
+.element_exec{
+  background: rgb(163, 160, 0);
+  margin: 5px;
+  padding: 5px;
+}
+
+.element_idle{
+  background: rgb(1, 66, 206);
   margin: 5px;
   padding: 5px;
 }
