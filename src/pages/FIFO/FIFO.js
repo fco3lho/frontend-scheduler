@@ -20,11 +20,11 @@ const FifoScheduler = () => {
 
   const [selectedProcess, setSelectedProcess] = useState();
 
-  function sleep(ms) {
+  const sleep = (ms) => {
     return new Promise((resolve) => setTimeout(resolve, ms));
   }
 
-  function countProcesses(data) {
+  const countProcesses = (data) => {
     const arrayIDs = [];
 
     for (let i = 0; i < data.length; i++) {
@@ -95,7 +95,7 @@ const FifoScheduler = () => {
 
   const handleSimulate = async () => {
     for (let i = 0; i < simulation.length; i++) {
-      await sleep(100);
+      await sleep(250);
       changeSpecificProcess(i);
       setFullTimeInExecution(simulation[i].fullTimeInExecution);
     }
