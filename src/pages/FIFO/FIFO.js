@@ -22,9 +22,9 @@ const FifoScheduler = () => {
   //Form
   const [from_value, setFrom_value] = useState(10);
   const [to_value, setTo_value] = useState(20);
-  const [cpu_weigth, setCpu_weigth] = useState(0.5);
-  const [memory_weigth, setMemory_weigth] = useState(0.3);
-  const [io_weight, setIo_weight] = useState(0.2);
+  const [cpu_weigth, setCpu_weigth] = useState(0.7);
+  const [memory_weigth, setMemory_weigth] = useState(0.6);
+  const [io_weight, setIo_weight] = useState(0.5);
 
   const sleep = (ms) => {
     return new Promise((resolve) => setTimeout(resolve, ms));
@@ -222,6 +222,39 @@ const FifoScheduler = () => {
           </div>
         </Link> */}
         <button>Escalonar</button>
+      </form>
+
+      <form className="schedule_dataload">
+        <label>
+          <span>Insira a carga de dados (Opcional): </span>
+          <br />
+          <textarea
+            cols="30"
+            rows="22"
+            placeholder={`"processes":
+[
+	{
+		"type": "cpu",
+		"time": 34,
+		"priority": 3,
+		"execTime": 0
+	},
+	{
+		"type": "io",
+		"time": 152,
+		"priority": 15,
+		"execTime": 0
+	},
+	{
+		"type": "memory",
+		"time": 87,
+		"priority": 7,
+		"execTime": 0
+	},
+]`}
+          ></textarea>
+        </label>
+        <button>Enviar carga de dados</button>
       </form>
 
       <h1 className="totalTime">
