@@ -33,17 +33,12 @@
   width: 5%;
 }
 
-.schedule_dataload{
+.schedule_dataset{
   position: absolute;
   left: 115em;
-  top: 11em;
   display: flex;
   flex-direction: column;
   align-items: center;
-}
-
-.schedule_dataload button{
-  margin: 1em;
 }
 
 .text {

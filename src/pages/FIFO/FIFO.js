@@ -25,6 +25,7 @@ const FifoScheduler = () => {
   const [cpu_weigth, setCpu_weigth] = useState(0.7);
   const [memory_weigth, setMemory_weigth] = useState(0.6);
   const [io_weight, setIo_weight] = useState(0.5);
+  const [dataset, setDataset] = useState();
 
   const sleep = (ms) => {
     return new Promise((resolve) => setTimeout(resolve, ms));
@@ -106,7 +107,8 @@ const FifoScheduler = () => {
     e.preventDefault();
 
     await Axios.get(
-      `http://localhost:3001/api/firstInFirstOut/${from_value}/${to_value}/${cpu_weigth}/${memory_weigth}/${io_weight}`
+      `http://localhost:3001/api/firstInFirstOut/${from_value}/${to_value}/${cpu_weigth}/${memory_weigth}/${io_weight}`,
+      { dataset: dataset }
     )
       .then((response) => {
         countProcesses(response.data);
@@ -204,33 +206,13 @@ const FifoScheduler = () => {
             }}
           />
         </label>
-        {/* <Link>
-          <div className="frame-parentschedule" onClick={handleSimulate}>
-            <svg
-              width="22"
-              height="25"
-              viewBox="0 0 22 25"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M4.13477 0.385966C3.29648 -0.11169 2.24297 -0.128096 1.3877 0.336748C0.532422 0.801591 0 1.67659 0 2.62815V21.8782C0 22.8297 0.532422 23.7047 1.3877 24.1696C2.24297 24.6344 3.29648 24.6125 4.13477 24.1203L20.4473 14.4953C21.2572 14.0196 21.75 13.1719 21.75 12.2532C21.75 11.3344 21.2572 10.4922 20.4473 10.011L4.13477 0.385966Z"
-                fill="white"
-              />
-            </svg>
-            <div className="schedule-escalonar">Escalonar</div>
-          </div>
-        </Link> */}
-        <button>Escalonar</button>
-      </form>
-
-      <form className="schedule_dataload">
-        <label>
+        <label className="schedule_dataset">
           <span>Insira a carga de dados (Opcional): </span>
           <br />
           <textarea
-            cols="30"
-            rows="22"
+            cols="32"
+            rows="21"
+            onChange={(e) => setDataset(e.target.value)}
             placeholder={`"processes":
 [
 	{
@@ -254,7 +236,7 @@ const FifoScheduler = () => {
 ]`}
           ></textarea>
         </label>
-        <button>Enviar carga de dados</button>
+        <button>Escalonar</button>
       </form>
 
       <h1 className="totalTime">
