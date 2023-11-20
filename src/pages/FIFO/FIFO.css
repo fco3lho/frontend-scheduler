@@ -1,5 +1,5 @@
 .totalTime{
-  margin: 250px 0 50px 0;
+  margin: 200px 0 50px 0;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -27,7 +27,7 @@
 
 .schedule_form button{
   position: relative;
-  left: 55rem;
+  left: 53rem;
   padding: 0.5em;
   margin-top: 1em;
   width: 5%;
@@ -39,6 +39,14 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+
+.clean_button{
+  position: relative;
+  top: 6.81em;
+  left: 60rem;
+  padding: 0.5em;
+  width: 5%;
 }
 
 .text {

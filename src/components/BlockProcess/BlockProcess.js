@@ -40,6 +40,12 @@ const BlockProcess = (props) => {
       <p>
         <strong>Total idle time:</strong> {props.totalIdleTime}
       </p>
+      <p>
+        <strong>Total time:</strong>{" "}
+        {props.fullTimeInExecution == null
+          ? "-"
+          : `${props.fullTimeInExecution}ms`}
+      </p>
     </div>
   );
 };

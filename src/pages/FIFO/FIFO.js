@@ -46,24 +46,17 @@ const FifoScheduler = () => {
   const changeSpecificProcess = (index) => {
     const arrayProcesses = [...processes];
 
-    arrayProcesses[simulation[index].processID - 1].processID =
-      simulation[index].processID;
-    arrayProcesses[simulation[index].processID - 1].action =
-      simulation[index].action;
-    arrayProcesses[simulation[index].processID - 1].execTimeIteration =
-      simulation[index].execTimeIteration;
-    arrayProcesses[simulation[index].processID - 1].idleTimeIteration =
-      simulation[index].idleTimeIteration;
-    arrayProcesses[simulation[index].processID - 1].processEnded =
-      simulation[index].processEnded;
-    arrayProcesses[simulation[index].processID - 1].processTimeRemaining =
-      simulation[index].processTimeRemaining;
-    arrayProcesses[simulation[index].processID - 1].quantum =
-      simulation[index].quantum;
-    arrayProcesses[simulation[index].processID - 1].totalExecTime =
-      simulation[index].totalExecTime;
-    arrayProcesses[simulation[index].processID - 1].totalIdleTime =
-      simulation[index].totalIdleTime;
+    arrayProcesses[simulation[index].processID - 1].processID = simulation[index].processID;
+    arrayProcesses[simulation[index].processID - 1].action = simulation[index].action;
+    arrayProcesses[simulation[index].processID - 1].execTimeIteration = simulation[index].execTimeIteration === "" ? ("-") : (simulation[index].execTimeIteration);
+    arrayProcesses[simulation[index].processID - 1].idleTimeIteration = simulation[index].idleTimeIteration === "" ? ("-") : (simulation[index].idleTimeIteration);
+    arrayProcesses[simulation[index].processID - 1].processEnded = simulation[index].processEnded;
+    arrayProcesses[simulation[index].processID - 1].processTimeRemaining = simulation[index].processTimeRemaining;
+    arrayProcesses[simulation[index].processID - 1].quantum = simulation[index].quantum;
+    arrayProcesses[simulation[index].processID - 1].totalExecTime = simulation[index].totalExecTime === "" ? ("-") : (simulation[index].totalExecTime);
+    arrayProcesses[simulation[index].processID - 1].totalIdleTime = simulation[index].totalIdleTime === "" ? ("-") : (simulation[index].totalIdleTime);
+
+    if(simulation[index].processEnded) arrayProcesses[simulation[index].processID - 1].fullTimeInExecution = simulation[index].fullTimeInExecution;
 
     setSelectedProcess(simulation[index].processID);
     setProcesses(arrayProcesses);
@@ -96,6 +89,7 @@ const FifoScheduler = () => {
         quantum: 0,
         totalExecTime: 0,
         totalIdleTime: 0,
+        fullTimeInExecution: null
       });
     }
 
@@ -119,12 +113,10 @@ const FifoScheduler = () => {
       });
 
     for (let i = 0; i < simulation.length; i++) {
-      await sleep(250);
+      await sleep(200);
       changeSpecificProcess(i);
       setFullTimeInExecution(simulation[i].fullTimeInExecution);
     }
-
-    setSelectedProcess(-1);
   };
 
   return (
@@ -238,6 +230,15 @@ const FifoScheduler = () => {
         </label>
         <button>Escalonar</button>
       </form>
+      <button
+        className="clean_button"
+        onClick={() => {
+          setSelectedProcess(-1);
+          setFullTimeInExecution(0);
+        }}
+      >
+        Limpar
+      </button>
 
       <h1 className="totalTime">
         <strong>Tempo total:</strong> {fullTimeInExecution} ms
@@ -256,6 +257,7 @@ const FifoScheduler = () => {
             processTimeRemaining={process.processTimeRemaining}
             totalExecTime={process.totalExecTime}
             totalIdleTime={process.totalIdleTime}
+            fullTimeInExecution={process.fullTimeInExecution}
             selectedProcess={selectedProcess}
           />
         ))}
