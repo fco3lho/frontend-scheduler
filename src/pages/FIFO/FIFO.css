@@ -1,5 +1,5 @@
 .totalTime{
-  margin: 220px 0 50px 0;
+  margin: 170px 0 40px 0;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -9,7 +9,28 @@
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
-  width: 1930px;
+  width: 1850px;
+}
+
+.schedule_form{
+  position: relative;
+  top: 7.69rem;
+  left: 0rem;
+  display: flex;
+  text-align: center;
+  flex-direction: column;
+}
+
+.schedule_form label{
+  padding: 10px;
+}
+
+.schedule_form button{
+  position: relative;
+  left: 55rem;
+  padding: 0.5em;
+  margin-top: 1em;
+  width: 5%;
 }
 
 .text {
@@ -82,8 +103,8 @@
   box-shadow: 3px 4px 26px rgba(0, 0, 0, 0.25);
   overflow: hidden;
   padding: var(--padding-10xl) var(--padding-29xl);
-  top: 7.69rem;
-  left: 53.2rem;
+  top: 14rem;
+  left: 51.7rem;
   border-radius: 8px;
   background-color: #16a34a;
   width: 6.56rem;
