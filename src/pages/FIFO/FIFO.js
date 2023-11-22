@@ -62,6 +62,27 @@ const FifoScheduler = () => {
     setProcesses(arrayProcesses);
   };
 
+  const handleSimulate = async (e) => {
+    e.preventDefault();
+
+    await Axios.get(
+      `http://localhost:3001/api/firstInFirstOut/${from_value}/${to_value}/${cpu_weigth}/${memory_weigth}/${io_weight}/${dataset}`
+    )
+      .then((response) => {
+        countProcesses(response.data);
+        setSimulation(response.data);
+      })
+      .catch((error) => {
+        console.log(error.response.data);
+      });
+
+    for (let i = 0; i < simulation.length; i++) {
+      await sleep(200);
+      changeSpecificProcess(i);
+      setFullTimeInExecution(simulation[i].fullTimeInExecution);
+    }
+  };
+
   useEffect(() => {
     Axios.get(
       `http://localhost:3001/api/firstInFirstOut/${from_value}/${to_value}/${cpu_weigth}/${memory_weigth}/${io_weight}/${dataset}`
@@ -96,27 +117,6 @@ const FifoScheduler = () => {
     setProcesses(arrayProcesses);
     setSelectedProcess(-2);
   }, [numberOfProcesses, selectedProcess === -1]);
-
-  const handleSimulate = async (e) => {
-    e.preventDefault();
-
-    await Axios.get(
-      `http://localhost:3001/api/firstInFirstOut/${from_value}/${to_value}/${cpu_weigth}/${memory_weigth}/${io_weight}/${dataset}`
-    )
-      .then((response) => {
-        countProcesses(response.data);
-        setSimulation(response.data);
-      })
-      .catch((error) => {
-        console.log(error.response.data);
-      });
-
-    for (let i = 0; i < simulation.length; i++) {
-      await sleep(200);
-      changeSpecificProcess(i);
-      setFullTimeInExecution(simulation[i].fullTimeInExecution);
-    }
-  };
 
   return (
     <div className="schedule-page">
@@ -202,28 +202,31 @@ const FifoScheduler = () => {
           <br />
           <textarea
             cols="32"
-            rows="21"
+            rows="24"
             onChange={(e) => setDataset(e.target.value)}
-            placeholder={`"processes":
+            placeholder={`Exemplo:
 [
-	{
-		"type": "cpu",
-		"time": 34,
-		"priority": 3,
-		"execTime": 0
-	},
-	{
-		"type": "io",
-		"time": 152,
-		"priority": 15,
-		"execTime": 0
-	},
-	{
-		"type": "memory",
-		"time": 87,
-		"priority": 7,
-		"execTime": 0
-	},
+  {
+      "type": "cpu",
+      "time": 80,
+      "priority": null,
+      "execTime": 0,
+      "user_id": null
+  },
+  {
+      "type": "cpu",
+      "time": 152,
+      "priority": null,
+      "execTime": 0,
+      "user_id": null
+  },
+  {
+      "type": "cpu",
+      "time": 87,
+      "priority": null,
+      "execTime": 0,
+      "user_id": null
+  }
 ]`}
           ></textarea>
         </label>
