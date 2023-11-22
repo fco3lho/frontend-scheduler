@@ -2,7 +2,7 @@ import "./FIFO.css";
 import homeIcon from "./vector.svg";
 
 //Hooks
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 //Components
@@ -46,17 +46,36 @@ const FifoScheduler = () => {
   const changeSpecificProcess = (index) => {
     const arrayProcesses = [...processes];
 
-    arrayProcesses[simulation[index].processID - 1].processID = simulation[index].processID;
-    arrayProcesses[simulation[index].processID - 1].action = simulation[index].action;
-    arrayProcesses[simulation[index].processID - 1].execTimeIteration = simulation[index].execTimeIteration === "" ? ("-") : (simulation[index].execTimeIteration);
-    arrayProcesses[simulation[index].processID - 1].idleTimeIteration = simulation[index].idleTimeIteration === "" ? ("-") : (simulation[index].idleTimeIteration);
-    arrayProcesses[simulation[index].processID - 1].processEnded = simulation[index].processEnded;
-    arrayProcesses[simulation[index].processID - 1].processTimeRemaining = simulation[index].processTimeRemaining;
-    arrayProcesses[simulation[index].processID - 1].quantum = simulation[index].quantum;
-    arrayProcesses[simulation[index].processID - 1].totalExecTime = simulation[index].totalExecTime === "" ? ("-") : (simulation[index].totalExecTime);
-    arrayProcesses[simulation[index].processID - 1].totalIdleTime = simulation[index].totalIdleTime === "" ? ("-") : (simulation[index].totalIdleTime);
+    arrayProcesses[simulation[index].processID - 1].processID =
+      simulation[index].processID;
+    arrayProcesses[simulation[index].processID - 1].action =
+      simulation[index].action;
+    arrayProcesses[simulation[index].processID - 1].execTimeIteration =
+      simulation[index].execTimeIteration === ""
+        ? "-"
+        : simulation[index].execTimeIteration;
+    arrayProcesses[simulation[index].processID - 1].idleTimeIteration =
+      simulation[index].idleTimeIteration === ""
+        ? "-"
+        : simulation[index].idleTimeIteration;
+    arrayProcesses[simulation[index].processID - 1].processEnded =
+      simulation[index].processEnded;
+    arrayProcesses[simulation[index].processID - 1].processTimeRemaining =
+      simulation[index].processTimeRemaining;
+    arrayProcesses[simulation[index].processID - 1].quantum =
+      simulation[index].quantum;
+    arrayProcesses[simulation[index].processID - 1].totalExecTime =
+      simulation[index].totalExecTime === ""
+        ? "-"
+        : simulation[index].totalExecTime;
+    arrayProcesses[simulation[index].processID - 1].totalIdleTime =
+      simulation[index].totalIdleTime === ""
+        ? "-"
+        : simulation[index].totalIdleTime;
 
-    if(simulation[index].processEnded) arrayProcesses[simulation[index].processID - 1].fullTimeInExecution = simulation[index].fullTimeInExecution;
+    if (simulation[index].processEnded)
+      arrayProcesses[simulation[index].processID - 1].fullTimeInExecution =
+        simulation[index].fullTimeInExecution;
 
     setSelectedProcess(simulation[index].processID);
     setProcesses(arrayProcesses);
@@ -89,7 +108,7 @@ const FifoScheduler = () => {
         quantum: 0,
         totalExecTime: 0,
         totalIdleTime: 0,
-        fullTimeInExecution: null
+        fullTimeInExecution: null,
       });
     }
 
