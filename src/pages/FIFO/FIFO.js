@@ -25,7 +25,7 @@ const FifoScheduler = () => {
   const [cpu_weigth, setCpu_weigth] = useState(0.7);
   const [memory_weigth, setMemory_weigth] = useState(0.6);
   const [io_weight, setIo_weight] = useState(0.5);
-  var [dataset, setDataset] = useState();
+  const [dataset, setDataset] = useState(0);
 
   const sleep = (ms) => {
     return new Promise((resolve) => setTimeout(resolve, ms));
@@ -64,7 +64,7 @@ const FifoScheduler = () => {
 
   useEffect(() => {
     Axios.get(
-      `http://localhost:3001/api/firstInFirstOut/${from_value}/${to_value}/${cpu_weigth}/${memory_weigth}/${io_weight}`
+      `http://localhost:3001/api/firstInFirstOut/${from_value}/${to_value}/${cpu_weigth}/${memory_weigth}/${io_weight}/${dataset}`
     )
       .then((response) => {
         countProcesses(response.data);
@@ -99,10 +99,6 @@ const FifoScheduler = () => {
 
   const handleSimulate = async (e) => {
     e.preventDefault();
-
-    if (dataset === undefined) {
-      dataset = 0
-    } 
 
     await Axios.get(
       `http://localhost:3001/api/firstInFirstOut/${from_value}/${to_value}/${cpu_weigth}/${memory_weigth}/${io_weight}/${dataset}`
