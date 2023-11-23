@@ -17,6 +17,9 @@ const BlockProcess = (props) => {
         <strong>Process ID:</strong> {props.id}
       </p>
       <p>
+        <strong>Priority:</strong> {props.priority}
+      </p>
+      <p>
         <strong>Finished:</strong> {props.ended ? <>Yes</> : <>No</>}
       </p>
       <p>

@@ -25,7 +25,7 @@ const PriorityQueues = () => {
   const [cpu_weigth, setCpu_weigth] = useState(0.7);
   const [memory_weigth, setMemory_weigth] = useState(0.6);
   const [io_weight, setIo_weight] = useState(0.5);
-  const [dataset, setDataset] = useState();
+  const [dataset, setDataset] = useState(0);
 
   const sleep = (ms) => {
     return new Promise((resolve) => setTimeout(resolve, ms));
@@ -129,7 +129,6 @@ const PriorityQueues = () => {
         setSimulation(response.data);
       })
       .catch((error) => {
-        console.log(response.data);
         console.log(error.response.data);
       });
 
@@ -271,8 +270,8 @@ const PriorityQueues = () => {
             key={index}
             id={process.processID}
             priority={process.priority}
-            ended={process.processEnded}
             action={process.action}
+            ended={process.processEnded}
             quantum={process.quantum}
             execTimeIteration={process.execTimeIteration}
             idleTimeIteration={process.idleTimeIteration}
