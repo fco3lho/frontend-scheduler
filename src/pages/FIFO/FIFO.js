@@ -166,7 +166,7 @@ const FifoScheduler = () => {
   return (
     <div className="schedule-page-FIFO">
       <div className="text" />
-      <div className="schedule-first-in-first">First In First Out</div>
+      <div className="schedule-first-in-first-FIFO">First In First Out</div>
       <Link to="/">
         <div className="schedule-page-child-FIFO" />
         <img className="schedule-vector-icon-FIFO" alt="" src={homeIcon} />
