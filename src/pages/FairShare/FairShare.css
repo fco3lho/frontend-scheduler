@@ -1,0 +1,151 @@
+.totalTime-FS{
+  margin: 200px 0 50px 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.element-container-FS {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  width: 1850px;
+}
+
+.schedule_form_FS{
+  position: relative;
+  top: 7.69rem;
+  left: 0rem;
+  display: flex;
+  text-align: center;
+  flex-direction: column;
+}
+
+.schedule_form_FS label{
+  padding: 10px;
+}
+
+.schedule_form_FS button{
+  position: relative;
+  left: 53rem;
+  padding: 0.5em;
+  margin-top: 1em;
+  width: 5%;
+}
+
+.schedule_dataset{
+  position: absolute;
+  top: -3em;
+  left: 115em;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.clean_button{
+  position: relative;
+  top: 6.81em;
+  left: 60rem;
+  padding: 0.5em;
+  width: 5%;
+}
+
+.text {
+  position: absolute;
+  top: 1.5rem;
+  left: 1.81rem;
+  color: #000;
+}
+
+.schedule-first-in-first-FS {
+  position: absolute;
+  top: calc(50% - 450px);
+  left: calc(50% - 720px);
+  font-size: 3.75rem;
+  line-height: 160%;
+  font-weight: 600;
+  text-align: center;
+  display: inline-block;
+  width: 90rem;
+  height: 8.94rem;
+}
+
+.schedule-page-child-FS {
+  position: absolute;
+  top: 1rem;
+  left: 1.81rem;
+  border-radius: 40px;
+  background-color: #000;
+  width: 8.75rem;
+  height: 4rem;
+  transition: background-color 0.2s, transform 0.2s;
+}
+
+.schedule-page-child-FS:hover {
+  background-color: #000;
+  transform: scale(1.05);
+}
+
+.schedule-vector-icon-FS {
+  position: absolute;
+  height: 3.13%;
+  width: 2.08%;
+  top: 3.78%;
+  right: 92.08%;
+  bottom: 93.1%;
+  left: 5.83%;
+  max-width: 100%;
+  overflow: hidden;
+  max-height: 100%;
+}
+
+.frame-icon {
+  position: relative;
+  width: 1.81rem;
+  height: 1.75rem;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.schedule-escalonar {
+  position: relative;
+  line-height: 125%;
+  font-weight: 600;
+  text-decoration: none;
+  color: #ffffff;
+}
+
+.frame-parentschedule {
+  position: absolute;
+  box-shadow: 3px 4px 26px rgba(0, 0, 0, 0.25);
+  overflow: hidden;
+  padding: var(--padding-10xl) var(--padding-29xl);
+  top: 14rem;
+  left: 51.7rem;
+  border-radius: 8px;
+  background-color: #16a34a;
+  width: 6.56rem;
+  height: .02rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  font-size: 1rem;
+  transition: background-color 0.2s, transform 0.2s;
+}
+
+.frame-parentschedule:hover {
+  background-color: var(--tailwind-green-600);
+  transform: scale(1.05);
+}
+
+.schedule-page-FS {
+  background-color: #292738;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  text-align: justify;
+  font-size: 0.75rem;
+  color: #fff;
+  font-family: Inter;
+}
