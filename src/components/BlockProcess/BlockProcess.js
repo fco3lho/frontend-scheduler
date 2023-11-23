@@ -40,6 +40,21 @@ const BlockProcess = (props) => {
       <p>
         <strong>Total idle time:</strong> {props.totalIdleTime}
       </p>
+
+      {/* Lógica para mostrar User ID somente quando o escalonador necessitar de
+      um User ID por usuário */}
+      {typeof props.user_id !== "undefined" ? (
+        props.user_id ? (
+          <p>
+            <strong>User ID:</strong> {props.user_id}
+          </p>
+        ) : (
+          <p>
+            <strong>User ID:</strong> -
+          </p>
+        )
+      ) : null}
+
       <p>
         <strong>Total time:</strong>{" "}
         {props.fullTimeInExecution == null

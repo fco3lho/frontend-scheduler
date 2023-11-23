@@ -74,6 +74,9 @@ const FairShare = () => {
 
     arrayProcesses[simulation[index].processID - 1].quantum =
       simulation[index].quantum;
+    
+    arrayProcesses[simulation[index].processID - 1].user_id =
+      simulation[index].user_id;
 
     arrayProcesses[simulation[index].processID - 1].totalExecTime =
       simulation[index].totalExecTime === ""
@@ -140,6 +143,7 @@ const FairShare = () => {
         processEnded: false,
         processTimeRemaining: 0,
         quantum: 0,
+        user_id: false,
         totalExecTime: 0,
         totalIdleTime: 0,
         fullTimeInExecution: null,
@@ -256,21 +260,21 @@ const FairShare = () => {
     "time": 80,
     "priority": null,
     "execTime": 0,
-    "user_id": null
+    "user_id": 1
 },
 {
     "type": "cpu",
     "time": 152,
     "priority": null,
     "execTime": 0,
-    "user_id": null
+    "user_id": 1
 },
 {
     "type": "cpu",
     "time": 87,
     "priority": null,
     "execTime": 0,
-    "user_id": null
+    "user_id": 2
 }
 ]`}
           ></textarea>
@@ -305,6 +309,7 @@ const FairShare = () => {
             processTimeRemaining={process.processTimeRemaining}
             totalExecTime={process.totalExecTime}
             totalIdleTime={process.totalIdleTime}
+            user_id={process.user_id}
             fullTimeInExecution={process.fullTimeInExecution}
             selectedProcess={selectedProcess}
           />
