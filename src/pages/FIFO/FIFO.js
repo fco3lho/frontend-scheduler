@@ -249,7 +249,7 @@ const FifoScheduler = () => {
             cols="32"
             rows="24"
             onChange={(e) => setDataset(e.target.value)}
-            placeholder={`Exemplo:
+            placeholder={`Exemplo com 3 processos:
 [
   {
       "type": "cpu",
