@@ -27,6 +27,10 @@ const FifoScheduler = () => {
   const [io_weight, setIo_weight] = useState(0.5);
   const [dataset, setDataset] = useState(0);
 
+  const [boolForSimulate, setBoolForSimulate] = useState();
+
+  //______________________Functions______________________
+
   const sleep = (ms) => {
     return new Promise((resolve) => setTimeout(resolve, ms));
   };
@@ -46,17 +50,44 @@ const FifoScheduler = () => {
   const changeSpecificProcess = (index) => {
     const arrayProcesses = [...processes];
 
-    arrayProcesses[simulation[index].processID - 1].processID = simulation[index].processID;
-    arrayProcesses[simulation[index].processID - 1].action = simulation[index].action;
-    arrayProcesses[simulation[index].processID - 1].execTimeIteration = simulation[index].execTimeIteration === "" ? ("-") : (simulation[index].execTimeIteration);
-    arrayProcesses[simulation[index].processID - 1].idleTimeIteration = simulation[index].idleTimeIteration === "" ? ("-") : (simulation[index].idleTimeIteration);
-    arrayProcesses[simulation[index].processID - 1].processEnded = simulation[index].processEnded;
-    arrayProcesses[simulation[index].processID - 1].processTimeRemaining = simulation[index].processTimeRemaining;
-    arrayProcesses[simulation[index].processID - 1].quantum = simulation[index].quantum;
-    arrayProcesses[simulation[index].processID - 1].totalExecTime = simulation[index].totalExecTime === "" ? ("-") : (simulation[index].totalExecTime);
-    arrayProcesses[simulation[index].processID - 1].totalIdleTime = simulation[index].totalIdleTime === "" ? ("-") : (simulation[index].totalIdleTime);
+    arrayProcesses[simulation[index].processID - 1].processID =
+      simulation[index].processID;
 
-    if(simulation[index].processEnded) arrayProcesses[simulation[index].processID - 1].fullTimeInExecution = simulation[index].fullTimeInExecution;
+    arrayProcesses[simulation[index].processID - 1].action =
+      simulation[index].action;
+
+    arrayProcesses[simulation[index].processID - 1].execTimeIteration =
+      simulation[index].execTimeIteration === ""
+        ? "-"
+        : simulation[index].execTimeIteration;
+
+    arrayProcesses[simulation[index].processID - 1].idleTimeIteration =
+      simulation[index].idleTimeIteration === ""
+        ? "-"
+        : simulation[index].idleTimeIteration;
+
+    arrayProcesses[simulation[index].processID - 1].processEnded =
+      simulation[index].processEnded;
+
+    arrayProcesses[simulation[index].processID - 1].processTimeRemaining =
+      simulation[index].processTimeRemaining;
+
+    arrayProcesses[simulation[index].processID - 1].quantum =
+      simulation[index].quantum;
+
+    arrayProcesses[simulation[index].processID - 1].totalExecTime =
+      simulation[index].totalExecTime === ""
+        ? "-"
+        : simulation[index].totalExecTime;
+
+    arrayProcesses[simulation[index].processID - 1].totalIdleTime =
+      simulation[index].totalIdleTime === ""
+        ? "-"
+        : simulation[index].totalIdleTime;
+
+    if (simulation[index].processEnded)
+      arrayProcesses[simulation[index].processID - 1].fullTimeInExecution =
+        simulation[index].fullTimeInExecution;
 
     setSelectedProcess(simulation[index].processID);
     setProcesses(arrayProcesses);
@@ -76,24 +107,25 @@ const FifoScheduler = () => {
         console.log(error.response.data);
       });
 
-    for (let i = 0; i < simulation.length; i++) {
-      await sleep(200);
-      changeSpecificProcess(i);
-      setFullTimeInExecution(simulation[i].fullTimeInExecution);
-    }
+    await sleep(100);
+    setBoolForSimulate(true);
   };
 
+  // ______________________useEffects______________________
+
   useEffect(() => {
-    Axios.get(
-      `http://localhost:3001/api/firstInFirstOut/${from_value}/${to_value}/${cpu_weigth}/${memory_weigth}/${io_weight}/${dataset}`
-    )
-      .then((response) => {
-        countProcesses(response.data);
-        setSimulation(response.data);
-      })
-      .catch((error) => {
-        console.log(error.response.data);
-      });
+    if (dataset === 0) {
+      Axios.get(
+        `http://localhost:3001/api/firstInFirstOut/${from_value}/${to_value}/${cpu_weigth}/${memory_weigth}/${io_weight}/${dataset}`
+      )
+        .then((response) => {
+          countProcesses(response.data);
+          setSimulation(response.data);
+        })
+        .catch((error) => {
+          console.log(error.response.data);
+        });
+    }
   }, []);
 
   useEffect(() => {
@@ -110,13 +142,26 @@ const FifoScheduler = () => {
         quantum: 0,
         totalExecTime: 0,
         totalIdleTime: 0,
-        fullTimeInExecution: null
+        fullTimeInExecution: null,
       });
     }
 
     setProcesses(arrayProcesses);
     setSelectedProcess(-2);
   }, [numberOfProcesses, selectedProcess === -1]);
+
+  useEffect(() => {
+    if (boolForSimulate) {
+      (async () => {
+        for (let i = 0; i < simulation.length; i++) {
+          await sleep(200);
+          changeSpecificProcess(i);
+          setFullTimeInExecution(simulation[i].fullTimeInExecution);
+        }
+        setBoolForSimulate(false);
+      })();
+    }
+  }, [boolForSimulate === true]);
 
   return (
     <div className="schedule-page">
@@ -230,10 +275,11 @@ const FifoScheduler = () => {
 ]`}
           ></textarea>
         </label>
-        <button>Escalonar</button>
+        <button disabled={boolForSimulate}>Escalonar</button>
       </form>
       <button
         className="clean_button"
+        disabled={boolForSimulate}
         onClick={() => {
           setSelectedProcess(-1);
           setFullTimeInExecution(0);
