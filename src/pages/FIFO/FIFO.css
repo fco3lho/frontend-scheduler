@@ -1,18 +1,18 @@
-.totalTime{
+.totalTime-FIFO{
   margin: 200px 0 50px 0;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-.element-container {
+.element-container-FIFO {
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
   width: 1850px;
 }
 
-.schedule_form{
+.schedule_form_FIFO{
   position: relative;
   top: 7.69rem;
   left: 0rem;
@@ -21,11 +21,11 @@
   flex-direction: column;
 }
 
-.schedule_form label{
+.schedule_form_FIFO label{
   padding: 10px;
 }
 
-.schedule_form button{
+.schedule_form_FIFO button{
   position: relative;
   left: 53rem;
   padding: 0.5em;
@@ -57,7 +57,7 @@
   color: #000;
 }
 
-.schedule-first-in-first {
+.schedule-first-in-first-FIFO {
   position: absolute;
   top: calc(50% - 450px);
   left: calc(50% - 720px);
@@ -70,7 +70,7 @@
   height: 8.94rem;
 }
 
-.schedule-page-child {
+.schedule-page-child-FIFO {
   position: absolute;
   top: 1rem;
   left: 1.81rem;
@@ -81,12 +81,12 @@
   transition: background-color 0.2s, transform 0.2s;
 }
 
-.schedule-page-child:hover {
+.schedule-page-child-FIFO:hover {
   background-color: #000;
   transform: scale(1.05);
 }
 
-.schedule-vector-icon {
+.schedule-vector-icon-FIFO {
   position: absolute;
   height: 3.13%;
   width: 2.08%;
@@ -139,7 +139,7 @@
   transform: scale(1.05);
 }
 
-.schedule-page {
+.schedule-page-FIFO {
   background-color: #292738;
   width: 100%;
   height: 100%;

@@ -164,15 +164,15 @@ const FifoScheduler = () => {
   }, [boolForSimulate === true]);
 
   return (
-    <div className="schedule-page">
+    <div className="schedule-page-FIFO">
       <div className="text" />
-      <div className="schedule-first-in-first">First In First Out</div>
+      <div className="schedule-first-in-first-FIFO">First In First Out</div>
       <Link to="/">
-        <div className="schedule-page-child" />
-        <img className="schedule-vector-icon" alt="" src={homeIcon} />
+        <div className="schedule-page-child-FIFO" />
+        <img className="schedule-vector-icon-FIFO" alt="" src={homeIcon} />
       </Link>
 
-      <form className="schedule_form" onSubmit={handleSimulate}>
+      <form className="schedule_form_FIFO" onSubmit={handleSimulate}>
         <label>
           <span>Valor inicial do intervalo randômico para quantum:</span>
           <input
@@ -288,11 +288,11 @@ const FifoScheduler = () => {
         Limpar
       </button>
 
-      <h1 className="totalTime">
-        <strong>Tempo total:</strong> {fullTimeInExecution} ms
+      <h1 className="totalTime-FIFO">
+        <strong>Tempo total:</strong> {fullTimeInExecution} ut
       </h1>
 
-      <div className="element-container">
+      <div className="element-container-FIFO">
         {processes.map((process, index) => (
           <BlockProcess
             key={index}
