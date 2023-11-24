@@ -289,7 +289,7 @@ const FifoScheduler = () => {
       </button>
 
       <h1 className="totalTime-FIFO">
-        <strong>Tempo total:</strong> {fullTimeInExecution} ms
+        <strong>Tempo total:</strong> {fullTimeInExecution} ut
       </h1>
 
       <div className="element-container-FIFO">

@@ -293,7 +293,7 @@ const FairShare = () => {
       </button>
 
       <h1 className="totalTime-FS">
-        <strong>Tempo total:</strong> {fullTimeInExecution} ms
+        <strong>Tempo total:</strong> {fullTimeInExecution} ut
       </h1>
 
       <div className="element-container-FS">
