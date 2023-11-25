@@ -1,17 +1,17 @@
-import "./PriorityQueues.css";
-import homeIcon from "./vector.svg";
+import "../FIFO/FIFO.css";
+import homeIcon from "../FIFO/vector.svg";
 
-// Hooks
+//Hooks
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
-// Components
+//Components
 import BlockProcess from "../../components/BlockProcess/BlockProcess";
 
 //Axios
 import Axios from "axios";
 
-const PriorityQueues = () => {
+const PriorityQueuesScheduler = () => {
   const [simulation, setSimulation] = useState();
   const [fullTimeInExecution, setFullTimeInExecution] = useState(0);
 
@@ -19,7 +19,7 @@ const PriorityQueues = () => {
   const [processes, setProcesses] = useState([]);
   const [selectedProcess, setSelectedProcess] = useState();
 
-  // Form
+  //Form
   const [from_value, setFrom_value] = useState(10);
   const [to_value, setTo_value] = useState(20);
   const [cpu_weigth, setCpu_weigth] = useState(0.7);
@@ -43,6 +43,7 @@ const PriorityQueues = () => {
         arrayIDs.push(data[i].processID);
       }
     }
+
     setNumberOfProcesses(arrayIDs.length);
   };
 
@@ -95,10 +96,30 @@ const PriorityQueues = () => {
     setProcesses(arrayProcesses);
   };
 
+  const handleSimulate = async (e) => {
+    e.preventDefault();
+
+    await Axios.get(
+      `http://localhost:3001/api/priorityQueues/${from_value}/${to_value}/${cpu_weigth}/${memory_weigth}/${io_weight}/${dataset}`
+    )
+      .then((response) => {
+        countProcesses(response.data);
+        setSimulation(response.data);
+      })
+      .catch((error) => {
+        console.log(error.response.data);
+      });
+
+    await sleep(100);
+    setBoolForSimulate(true);
+  };
+
+  // ______________________useEffects______________________
+
   useEffect(() => {
     if (dataset === 0) {
       Axios.get(
-        `http://localhost:3001/api/firstInFirstOut/${from_value}/${to_value}/${cpu_weigth}/${memory_weigth}/${io_weight}/${dataset}`
+        `http://localhost:3001/api/priorityQueues/${from_value}/${to_value}/${cpu_weigth}/${memory_weigth}/${io_weight}/${dataset}`
       )
         .then((response) => {
           countProcesses(response.data);
@@ -146,35 +167,18 @@ const PriorityQueues = () => {
     }
   }, [boolForSimulate === true]);
 
-  const handleSimulate = async (e) => {
-    e.preventDefault();
-
-    await Axios.get(
-      `http://localhost:3001/api/priorityQueues/${from_value}/${to_value}/${cpu_weigth}/${memory_weigth}/${io_weight}/${dataset}`
-    )
-      .then((response) => {
-        countProcesses(response.data);
-        setSimulation(response.data);
-      })
-      .catch((error) => {
-        console.log(error.response.data);
-      });
-
-    await sleep(100);
-    setBoolForSimulate(true);
-  };
-
   return (
     <div className="schedule-page-FIFO">
       <div className="text" />
-      <div className="schedule-first-in-first-FIFO">Fila de prioridade</div>
+      <div className="schedule-first-in-first-FIFO">Fila de Prioridade</div>
       <Link to="/">
         <div className="schedule-page-child-FIFO" />
         <img className="schedule-vector-icon-FIFO" alt="" src={homeIcon} />
       </Link>
+
       <form className="schedule_form_FIFO" onSubmit={handleSimulate}>
         <label>
-          <span>Valor inicial do intervalo randomico para quantum:</span>
+          <span>Valor inicial do intervalo randômico para quantum:</span>
           <input
             type="number"
             name="from_value"
@@ -198,7 +202,7 @@ const PriorityQueues = () => {
           />
         </label>
         <label>
-          <span>Tempo de execucao para CPU:</span>
+          <span>Tempo de execução para CPU:</span>
           <input
             type="number"
             name="cpu_weigth"
@@ -213,7 +217,7 @@ const PriorityQueues = () => {
           />
         </label>
         <label>
-          <span>Tempo de execucao para memoria:</span>
+          <span>Tempo de execução para memória:</span>
           <input
             type="number"
             name="memory_weigth"
@@ -228,7 +232,7 @@ const PriorityQueues = () => {
           />
         </label>
         <label>
-          <span>Tempo de execucao para Input/Output:</span>
+          <span>Tempo de execução para Input/Output:</span>
           <input
             type="number"
             name="io_weigth"
@@ -247,16 +251,16 @@ const PriorityQueues = () => {
           <br />
           <textarea
             cols="32"
-            rows="21"
+            rows="24"
             onChange={(e) => setDataset(e.target.value)}
-            placeholder={`Exemplo com três processos:
+            placeholder={`Exemplo com 3 processos:
 [
   {
-    "type": "cpu",
-    "time": 80,
-    "priority": null,
-    "execTime": 0,
-    "user_id": null
+      "type": "cpu",
+      "time": 80,
+      "priority": null,
+      "execTime": 0,
+      "user_id": null
   },
   {
       "type": "cpu",
@@ -271,13 +275,12 @@ const PriorityQueues = () => {
       "priority": null,
       "execTime": 0,
       "user_id": null
-  },
+  }
 ]`}
           ></textarea>
         </label>
         <button disabled={boolForSimulate}>Escalonar</button>
       </form>
-
       <button
         className="clean_button"
         disabled={boolForSimulate}
@@ -299,8 +302,8 @@ const PriorityQueues = () => {
             key={index}
             id={process.processID}
             priority={process.priority}
-            action={process.action}
             ended={process.processEnded}
+            action={process.action}
             quantum={process.quantum}
             execTimeIteration={process.execTimeIteration}
             idleTimeIteration={process.idleTimeIteration}
@@ -316,4 +319,4 @@ const PriorityQueues = () => {
   );
 };
 
-export default PriorityQueues;
+export default PriorityQueuesScheduler;
