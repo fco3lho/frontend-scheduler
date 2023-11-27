@@ -1,0 +1,78 @@
+.frame-parentschedule-lot {
+    box-shadow: 3px 4px 26px rgba(0, 0, 0, 0.25);
+    overflow: hidden;
+    padding: var(--padding-10xl) var(--padding-29xl);
+    top: 14rem;
+    left: 51.7rem;
+    border-radius: 8px;
+    background-color: #16a34a;
+    width: 6.56rem;
+    height: .02rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    font-size: 1rem;
+    transition: background-color 0.2s, transform 0.2s;
+  }
+
+  .schedule_form-lot{
+    position: absolute;
+    top: 26%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    width: 600px; 
+  }
+  
+  .schedule_form-lot label{
+    padding: 10px;
+  }
+  
+  .schedule_form-lot button {
+    margin-top: 1em;
+    width: 100%; /* Ocupa a largura total do contêiner */
+    padding: 10px;
+    width: calc(33.33% - 0.5em);
+    color: #fff;
+    width: 150px;
+    background-color: #3c3858;
+    border-radius: 10%;
+}
+
+/* Estilo para o segundo botão */
+.schedule_form-lot .button-secondary {
+    background-color: #443e6b;
+    color: #fff;
+    padding: 10px;
+    width: calc(33.33% - 0.5em);
+    width: 150px;
+    margin-left: 1em;
+    border-radius: 10%;
+}
+
+/* Estilo para o terceiro botão */
+.schedule_form-lot .button-tertiary {
+    background-color: #534a8b;
+    color: #fff;
+    padding: 10px;
+    width: calc(33.33% - 0.5em);
+    width: 150px;
+    margin-left: 1em;
+    border-radius: 10%;
+}
+  
+  .text {
+    top: 1.5rem;
+    left: 1.81rem;
+    color: #000;
+  }
+
+  .botoes-lot{
+    display: flex;
+    justify-content: space-between;
+  }
+  
