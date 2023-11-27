@@ -102,9 +102,9 @@ const Lottery = () => {
           setSelectedProcess(-2);
         }, [numberOfProcesses, selectedProcess === -1]);
       
-        const handleButtonClick = async (e) => {
+        const handleSimulate = async (e) => {
           e.preventDefault();
-      
+			
           await Axios.get(
             `http://localhost:3001/api/lottery/${from_value}/${to_value}/${cpu_weigth}/${memory_weigth}/${io_weight}/${lottery_type}`
           )
@@ -133,7 +133,7 @@ const Lottery = () => {
               <div className="schedule-page-child" />
               <img className="schedule-vector-icon" alt="" src={homeIcon} />
           </Link>
-        <form className="schedule_form-lot">
+        <form className="schedule_form-lot" onSubmit={handleSimulate}>
         <label>
           <span>Valor inicial do intervalo randômico para quantum:</span>
           <input
