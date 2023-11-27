@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import {Link} from "react-router-dom";
 import homeIcon from "../FIFO/vector.svg";
 import './Lottery.css'
+import Axios from "axios";
 
 
 
@@ -13,6 +14,107 @@ const Lottery = () => {
         const [cpu_weigth, setCpu_weigth] = useState(0.5);
         const [memory_weigth, setMemory_weigth] = useState(0.3);
         const [io_weight, setIo_weight] = useState(0.2);
+		const [lottery_type, setLottery_type] = useState('');
+
+        const sleep = (ms) => {
+          return new Promise((resolve) => setTimeout(resolve, ms));
+        };
+      
+        const countProcesses = (data) => {
+          const arrayIDs = [];
+      
+          for (let i = 0; i < data.length; i++) {
+            if (!arrayIDs.includes(data[i].processID)) {
+              arrayIDs.push(data[i].processID);
+            }
+          }
+      
+          setNumberOfProcesses(arrayIDs.length);
+        };
+      
+        const changeSpecificProcess = (index) => {
+          const arrayProcesses = [...processes];
+      
+          arrayProcesses[simulation[index].processID - 1].processID =
+            simulation[index].processID;
+          arrayProcesses[simulation[index].processID - 1].action =
+            simulation[index].action;
+          arrayProcesses[simulation[index].processID - 1].execTimeIteration =
+            simulation[index].execTimeIteration;
+          arrayProcesses[simulation[index].processID - 1].idleTimeIteration =
+            simulation[index].idleTimeIteration;
+          arrayProcesses[simulation[index].processID - 1].processEnded =
+            simulation[index].processEnded;
+          arrayProcesses[simulation[index].processID - 1].processTimeRemaining =
+            simulation[index].processTimeRemaining;
+          arrayProcesses[simulation[index].processID - 1].quantum =
+            simulation[index].quantum;
+          arrayProcesses[simulation[index].processID - 1].totalExecTime =
+            simulation[index].totalExecTime;
+          arrayProcesses[simulation[index].processID - 1].totalIdleTime =
+            simulation[index].totalIdleTime;
+      
+          setSelectedProcess(simulation[index].processID);
+          setProcesses(arrayProcesses);
+        };
+      
+        useEffect(() => {
+          Axios.get(
+            `http://localhost:3001/api/lottery/${from_value}/${to_value}/${cpu_weigth}/${memory_weigth}/${io_weight}/${lottery_type}`
+          )
+            .then((response) => {
+              countProcesses(response.data);
+              setSimulation(response.data);
+            })
+            .catch((error) => {
+              console.log(error.response.data);
+            });
+        }, []);
+      
+        useEffect(() => {
+          let arrayProcesses = [];
+      
+          for (let i = 0; i < numberOfProcesses; i++) {
+            arrayProcesses.push({
+              processID: i + 1,
+              action: "stopped",
+              execTimeIteration: 0,
+              idleTimeIteration: 0,
+              processEnded: false,
+              processTimeRemaining: 0,
+              quantum: 0,
+              totalExecTime: 0,
+              totalIdleTime: 0,
+			  winnerTicket: 0
+            });
+          }
+      
+          setProcesses(arrayProcesses);
+          setSelectedProcess(-2);
+        }, [numberOfProcesses, selectedProcess === -1]);
+      
+        const handleButtonClick = async (e) => {
+          e.preventDefault();
+      
+          await Axios.get(
+            `http://localhost:3001/api/lottery/${from_value}/${to_value}/${cpu_weigth}/${memory_weigth}/${io_weight}/${lottery_type}`
+          )
+            .then((response) => {
+              countProcesses(response.data);
+              setSimulation(response.data);
+            })
+            .catch((error) => {
+              console.log(error.response.data);
+            });
+      
+          for (let i = 0; i < simulation.length; i++) {
+            await sleep(250);
+            changeSpecificProcess(i);
+            setFullTimeInExecution(simulation[i].fullTimeInExecution);
+          }
+      
+          setSelectedProcess(-1);
+        };
       
   return (
       <div className="schedule-page">
@@ -93,11 +195,34 @@ const Lottery = () => {
           />
         </label>
         <div className='botoes-lot'>
-            <button>Randômica</button>
-            <button type="submit" class="button-secondary">Prioritária</button>
-            <button type="submit" class="button-tertiary">Igualitária</button>
-        </div>
+      <button onClick={() => { setLottery_type('acao1'); handleButtonClick('acao1'); }}>Randômica</button>
+      <button onClick={() => { setLottery_type('acao2'); handleButtonClick('acao2'); }} className="button-secondary">Prioritária</button>
+      <button onClick={() => { setLottery_type('acao3'); handleButtonClick('acao3'); }} className="button-tertiary">Igualitária</button>
+    </div>
       </form>
+
+	  <h1 className="totalTime">
+        <strong>Tempo total:</strong> {fullTimeInExecution} ms
+      </h1>
+
+      <div className="element-container">
+        {processes.map((process, index) => (
+          <BlockProcess
+            key={index}
+            id={process.processID}
+            ended={process.processEnded}
+            action={process.action}
+            quantum={process.quantum}
+            execTimeIteration={process.execTimeIteration}
+            idleTimeIteration={process.idleTimeIteration}
+            processTimeRemaining={process.processTimeRemaining}
+            totalExecTime={process.totalExecTime}
+            totalIdleTime={process.totalIdleTime}
+            selectedProcess={selectedProcess}
+			winnerTicket={process.winnerTicket}
+          />
+        ))}
+      </div>
       </div>
   )
 }
