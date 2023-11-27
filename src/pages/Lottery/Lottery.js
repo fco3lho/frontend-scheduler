@@ -10,7 +10,7 @@ import BlockProcess from "../../components/BlockProcess/BlockProcess";
 
 const Lottery = () => {
 
-	const [simulation, setSimulation] = useState();
+	const [simulation, setSimulation] = useState([]);
 	const [fullTimeInExecution, setFullTimeInExecution] = useState(0);
   
 	const [numberOfProcesses, setNumberOfProcesses] = useState(0);
@@ -69,7 +69,7 @@ const Lottery = () => {
       
         useEffect(() => {
           Axios.get(
-            `http://localhost:3001/api/lottery/${from_value}/${to_value}/${cpu_weigth}/${memory_weigth}/${io_weight}/${lottery_type}`
+            `http://localhost:3001/api/lottery/${from_value}/${to_value}/${cpu_weigth}/${memory_weigth}/${io_weight}/0/${lottery_type}`
           )
             .then((response) => {
               countProcesses(response.data);
@@ -106,7 +106,7 @@ const Lottery = () => {
           e.preventDefault();
 			
           await Axios.get(
-            `http://localhost:3001/api/lottery/${from_value}/${to_value}/${cpu_weigth}/${memory_weigth}/${io_weight}/${lottery_type}`
+            `http://localhost:3001/api/lottery/${from_value}/${to_value}/${cpu_weigth}/${memory_weigth}/${io_weight}/0/${lottery_type}`
           )
             .then((response) => {
               countProcesses(response.data);
@@ -133,7 +133,7 @@ const Lottery = () => {
               <div className="schedule-page-child" />
               <img className="schedule-vector-icon" alt="" src={homeIcon} />
           </Link>
-        <form className="schedule_form-lot" onSubmit={handleSimulate}>
+        <form className="schedule_form-lot" >
         <label>
           <span>Valor inicial do intervalo randômico para quantum:</span>
           <input
