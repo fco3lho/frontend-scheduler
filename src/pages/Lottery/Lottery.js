@@ -3,10 +3,19 @@ import {Link} from "react-router-dom";
 import homeIcon from "../FIFO/vector.svg";
 import './Lottery.css'
 import Axios from "axios";
+import { useEffect } from "react";
 
+import BlockProcess from "../../components/BlockProcess/BlockProcess";
 
 
 const Lottery = () => {
+
+	const [simulation, setSimulation] = useState();
+	const [fullTimeInExecution, setFullTimeInExecution] = useState(0);
+  
+	const [numberOfProcesses, setNumberOfProcesses] = useState(0);
+	const [processes, setProcesses] = useState([]);
+	const [selectedProcess, setSelectedProcess] = useState();
 
         //Form
         const [from_value, setFrom_value] = useState(10);
@@ -194,15 +203,25 @@ const Lottery = () => {
             }}
           />
         </label>
-        <div className='botoes-lot'>
-      <button onClick={() => { setLottery_type('acao1'); handleButtonClick('acao1'); }}>Randômica</button>
-      <button onClick={() => { setLottery_type('acao2'); handleButtonClick('acao2'); }} className="button-secondary">Prioritária</button>
-      <button onClick={() => { setLottery_type('acao3'); handleButtonClick('acao3'); }} className="button-tertiary">Igualitária</button>
-    </div>
+		<label>
+  <span>Tipo de ação realizada</span>
+  <select
+    name="lottery_type"
+    value={lottery_type}
+    onChange={(e) => {
+      setLottery_type(e.target.value);
+    }}
+    required
+  >
+    <option value="acao1">Randômica</option>
+    <option value="acao2">Prioritária</option>
+    <option value="acao3">Igualitária</option>
+  </select>
+</label>
+	<button>Escalonar</button>
       </form>
-
 	  <h1 className="totalTime">
-        <strong>Tempo total:</strong> {fullTimeInExecution} ms
+        <strong>Tempo total: </strong> {fullTimeInExecution} ms
       </h1>
 
       <div className="element-container">
