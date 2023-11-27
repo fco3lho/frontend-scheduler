@@ -1,0 +1,152 @@
+.frame-parentschedule-lot {
+  box-shadow: 3px 4px 26px rgba(0, 0, 0, 0.25);
+  overflow: hidden;
+  padding: var(--padding-10xl) var(--padding-29xl);
+  top: 14rem;
+  left: 51.7rem;
+  border-radius: 8px;
+  background-color: #16a34a;
+  width: 6.56rem;
+  height: .02rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  font-size: 1rem;
+  transition: background-color 0.2s, transform 0.2s;
+}
+
+.schedule-page-lot {
+  background-color: #292738;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  text-align: justify;
+  font-size: 0.75rem;
+  color: #fff;
+  font-family: Inter;
+}
+
+.schedule-page-child-lot {
+  position: absolute;
+  top: 1rem;
+  left: 1.81rem;
+  border-radius: 40px;
+  background-color: #000;
+  width: 8.75rem;
+  height: 4rem;
+  transition: background-color 0.2s, transform 0.2s;
+}
+
+.schedule-page-child-lot:hover {
+  background-color: #000;
+  transform: scale(1.05);
+}
+
+.schedule_form-lot{
+  position: absolute;
+  top: 26%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  width: 600px; 
+}
+
+.schedule_form-lot label{
+  padding: 10px;
+}
+
+.schedule_form-lot button {
+  margin-top: 1em;
+  width: 100%; /* Ocupa a largura total do contêiner */
+  padding: 10px;
+  width: calc(33.33% - 0.5em);
+  color: #fff;
+  width: 150px;
+  background-color: #3c3858;
+  border-radius: 10%;
+}
+
+.text {
+  top: 1.5rem;
+  left: 1.81rem;
+  color: #000;
+}
+
+.totalTime{
+  margin-top: 430px;
+}
+
+.element-container-lot {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  width: 1850px;
+}
+
+.schedule-lot {
+  position: absolute;
+  top: calc(50% - 450px);
+  left: calc(50% - 720px);
+  font-size: 3.75rem;
+  line-height: 160%;
+  font-weight: 600;
+  text-align: center;
+  display: inline-block;
+  width: 90rem;
+  height: 8.94rem;
+}
+.schedule_form_lot{
+  margin-top: 55px;
+  position: absolute;
+  top: 26%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  width: 600px; 
+}
+
+.schedule_form_lot label{
+  padding: 10px;
+}
+
+.schedule_form_lot button{
+  margin-top: 1em;
+  width: 100%; /* Ocupa a largura total do contêiner */
+  padding: 10px;
+  width: calc(33.33% - 0.5em);
+  color: #fff;
+  width: 150px;
+  background-color: #3c3858;
+  border-radius: 10%;
+}
+
+.schedule_dataset{
+  position: absolute;
+  top: -3em;
+  left: 115em;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+
+.text {
+  position: absolute;
+  top: 1.5rem;
+  left: 1.81rem;
+  color: #000;
+}
+
+.totalTime-lot{
+  margin: 500px 0 50px 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
