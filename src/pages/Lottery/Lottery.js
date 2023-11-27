@@ -204,9 +204,9 @@ const Lottery = () => {
             }}
           />
         </label>
-	<button onClick={()=>setX(0)} >Random</button>
-    <button onClick={()=>setX(1)} >Priorio</button>
-    <button onClick={()=>setX(2)} >Igual</button>
+	<button onClick={()=>setX(0)} >Randômico</button>
+    <button onClick={()=>setX(1)} >Prioritário</button>
+    <button onClick={()=>setX(2)} >Igualitário</button>
       </form>
 	  <h1 className="totalTime-lot">
         <strong>Tempo total: </strong> {fullTimeInExecution} ut
