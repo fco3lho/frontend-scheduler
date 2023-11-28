@@ -46,7 +46,7 @@ npm install
 npm start
 ```
 
-A aplicação estará acessível em http://localhost:3000.
+A aplicação estará acessível em http://localhost:3000. Importante lembrar que só funcionará por completo caso o [back-end](https://github.com/farinellizin/scheduler-backend) esteja rodando na porta 3001.
 
 ## Uso
 
