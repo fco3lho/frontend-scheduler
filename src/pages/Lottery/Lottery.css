@@ -5,6 +5,20 @@
   justify-content: center;
 }
 
+.winner-ticket {
+  color: rgb(229, 255, 0);
+  margin-left: 5px;
+}
+
+
+.ticket-lot{
+  margin: 0px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+
 .element-container-lot {
   display: flex;
   justify-content: center;

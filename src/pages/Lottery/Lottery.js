@@ -12,6 +12,7 @@ const Lottery = () => {
 
 	const [simulation, setSimulation] = useState([]);
 	const [fullTimeInExecution, setFullTimeInExecution] = useState(0);
+  const [winnerTicket, setWinnerTicket] = useState(0);
   
 	const [numberOfProcesses, setNumberOfProcesses] = useState(0);
 	const [processes, setProcesses] = useState([]);
@@ -144,6 +145,7 @@ const Lottery = () => {
             await sleep(250);
             changeSpecificProcess(i);
             setFullTimeInExecution(simulation[i].fullTimeInExecution);
+            setWinnerTicket(simulation[i].winnerTicket);
           }
       
           setSelectedProcess(-1);
@@ -154,9 +156,9 @@ const Lottery = () => {
           <div className="text" />
           <div className="schedule-lot">Loteria</div>
           <Link to="/">
-              <div className="schedule-page-child-lot" />
-              <img className="schedule-vector-icon" alt="" src={homeIcon} />
-          </Link>
+        <div className="schedule-page-child-FIFO" />
+        <img className="schedule-vector-icon-FIFO" alt="" src={homeIcon} />
+      </Link>
         <form className="schedule_form_lot" onSubmit={handleSimulate} >
         <label>
           <span>Valor inicial do intervalo randômico para quantum:</span>
@@ -269,6 +271,11 @@ const Lottery = () => {
 	  <h1 className="totalTime-lot">
         <strong>Tempo total: </strong> {fullTimeInExecution} ut
       </h1>
+
+      <h1 className="ticket-lot">
+  <strong>Ticket sorteado: </strong> 
+  <span className="winner-ticket">{winnerTicket}</span>
+</h1>
 
       <div className="element-container-lot">
         {processes.map((process, index) => (
