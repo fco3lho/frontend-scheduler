@@ -16,9 +16,21 @@ const BlockProcess = (props) => {
       <p>
         <strong>Process ID:</strong> {props.id}
       </p>
-      <p>
-        <strong>Priority:</strong> {props.priority}
-      </p>
+
+      {/* Lógica para mostrar prioridade somente quando o escalonador necessitar de
+      da prioridade para o escalonador */}
+      {typeof props.priority !== "undefined" ? (
+        props.priority ? (
+          <p>
+            <strong>Priority:</strong> {props.priority}
+          </p>
+        ) : (
+          <p>
+            <strong>Priority:</strong> -
+          </p>
+        )
+      ) : null}
+
       <p>
         <strong>Finished:</strong> {props.ended ? <>Yes</> : <>No</>}
       </p>

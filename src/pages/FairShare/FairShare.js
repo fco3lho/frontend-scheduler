@@ -170,7 +170,7 @@ const FairShare = () => {
   return (
     <div className="schedule-page-FS">
       <div className="text" />
-      <div className="schedule-first-in-first-FS">First In First Out</div>
+      <div className="schedule-first-in-first-FS">Fair Share</div>
       <Link to="/">
         <div className="schedule-page-child-FS" />
         <img className="schedule-vector-icon-FS" alt="" src={homeIcon} />
