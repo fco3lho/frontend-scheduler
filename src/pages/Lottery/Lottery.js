@@ -24,6 +24,7 @@ const Lottery = () => {
         const [memory_weigth, setMemory_weigth] = useState(0.3);
         const [io_weight, setIo_weight] = useState(0.2);
 		const [lottery_type, setLottery_type] = useState(['random', 'priority', 'equal']);
+    const [dataset, setDataset] = useState(0);
         const [x, setX] = useState(0);
 
         const sleep = (ms) => {
@@ -47,38 +48,60 @@ const Lottery = () => {
       
           arrayProcesses[simulation[index].processID - 1].processID =
             simulation[index].processID;
+      
           arrayProcesses[simulation[index].processID - 1].action =
             simulation[index].action;
+      
           arrayProcesses[simulation[index].processID - 1].execTimeIteration =
-            simulation[index].execTimeIteration;
+            simulation[index].execTimeIteration === ""
+              ? "-"
+              : simulation[index].execTimeIteration;
+      
           arrayProcesses[simulation[index].processID - 1].idleTimeIteration =
-            simulation[index].idleTimeIteration;
+            simulation[index].idleTimeIteration === ""
+              ? "-"
+              : simulation[index].idleTimeIteration;
+      
           arrayProcesses[simulation[index].processID - 1].processEnded =
             simulation[index].processEnded;
+      
           arrayProcesses[simulation[index].processID - 1].processTimeRemaining =
             simulation[index].processTimeRemaining;
+      
           arrayProcesses[simulation[index].processID - 1].quantum =
             simulation[index].quantum;
+      
           arrayProcesses[simulation[index].processID - 1].totalExecTime =
-            simulation[index].totalExecTime;
+            simulation[index].totalExecTime === ""
+              ? "-"
+              : simulation[index].totalExecTime;
+      
           arrayProcesses[simulation[index].processID - 1].totalIdleTime =
-            simulation[index].totalIdleTime;
+            simulation[index].totalIdleTime === ""
+              ? "-"
+              : simulation[index].totalIdleTime;
+      
+          if (simulation[index].processEnded)
+            arrayProcesses[simulation[index].processID - 1].fullTimeInExecution =
+              simulation[index].fullTimeInExecution;
       
           setSelectedProcess(simulation[index].processID);
           setProcesses(arrayProcesses);
         };
       
         useEffect(() => {
-          Axios.get(
-            `http://localhost:3001/api/lottery/${from_value}/${to_value}/${cpu_weigth}/${memory_weigth}/${io_weight}/0/${lottery_type[x]}`
-          )
-            .then((response) => {
-              countProcesses(response.data);
-              setSimulation(response.data);
-            })
-            .catch((error) => {
-              console.log(error.response.data);
-            });
+          if (dataset === 0) {
+            Axios.get(
+              `http://localhost:3001/api/lottery/${from_value}/${to_value}/${cpu_weigth}/${memory_weigth}/${io_weight}/${dataset}/${lottery_type[x]}`
+            )
+              .then((response) => {
+                countProcesses(response.data);
+                setSimulation(response.data);
+              })
+              .catch((error) => {
+                console.log(error.response.data);
+              });
+          }
         }, []);
       
         useEffect(() => {
@@ -107,7 +130,7 @@ const Lottery = () => {
           e.preventDefault();
 			
           await Axios.get(
-            `http://localhost:3001/api/lottery/${from_value}/${to_value}/${cpu_weigth}/${memory_weigth}/${io_weight}/0/${lottery_type[x]}`
+            `http://localhost:3001/api/lottery/${from_value}/${to_value}/${cpu_weigth}/${memory_weigth}/${io_weight}/${dataset}/${lottery_type[x]}`
           )
             .then((response) => {
               countProcesses(response.data);
@@ -204,9 +227,44 @@ const Lottery = () => {
             }}
           />
         </label>
-	<button onClick={()=>setX(0)} >Randômico</button>
-    <button onClick={()=>setX(1)} >Prioritário</button>
-    <button onClick={()=>setX(2)} >Igualitário</button>
+        <label className="schedule_dataset">
+          <span>Insira a carga de dados (Opcional): </span>
+          <br />
+          <textarea
+            cols="32"
+            rows="24"
+            onChange={(e) => setDataset(e.target.value)}
+            placeholder={`Exemplo com 3 processos:
+[
+  {
+      "type": "cpu",
+      "time": 80,
+      "priority": null,
+      "execTime": 0,
+      "user_id": null
+  },
+  {
+      "type": "cpu",
+      "time": 152,
+      "priority": null,
+      "execTime": 0,
+      "user_id": null
+  },
+  {
+      "type": "cpu",
+      "time": 87,
+      "priority": null,
+      "execTime": 0,
+      "user_id": null
+  }
+]`}
+          ></textarea>
+        </label>
+        <div className="ButtonsContainer">
+          <button onClick={()=>setX(0)} >Randômico</button>
+            <button onClick={()=>setX(1)} >Prioritário</button>
+            <button onClick={()=>setX(2)} >Igualitário</button>
+    </div>
       </form>
 	  <h1 className="totalTime-lot">
         <strong>Tempo total: </strong> {fullTimeInExecution} ut
