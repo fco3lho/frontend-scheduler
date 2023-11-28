@@ -18,6 +18,8 @@ const Lottery = () => {
 	const [processes, setProcesses] = useState([]);
 	const [selectedProcess, setSelectedProcess] = useState();
 
+  const [boolForSimulate, setBoolForSimulate] = useState();
+
         //Form
         const [from_value, setFrom_value] = useState(10);
         const [to_value, setTo_value] = useState(20);
@@ -140,6 +142,8 @@ const Lottery = () => {
             .catch((error) => {
               console.log(error.response.data);
             });
+
+            setBoolForSimulate(true);
       
           for (let i = 0; i < simulation.length; i++) {
             await sleep(250);
@@ -150,6 +154,18 @@ const Lottery = () => {
       
           setSelectedProcess(-1);
         };
+
+        useEffect(() => {
+          if (boolForSimulate) {
+            (async () => {
+              for (let i = 0; i < simulation.length; i++) {
+                await sleep(200);
+                
+              }
+              setBoolForSimulate(false);
+            })();
+          }
+        }, [boolForSimulate === true]);
       
   return (
       <div className="schedule-page-lot">
@@ -263,9 +279,9 @@ const Lottery = () => {
           ></textarea>
         </label>
         <div className="ButtonsContainer">
-          <button onClick={()=>setX(0)} >Randômico</button>
-            <button onClick={()=>setX(1)} >Prioritário</button>
-            <button onClick={()=>setX(2)} >Igualitário</button>
+          <button   disabled={boolForSimulate} onClick={()=>setX(0)} >Randômico</button>
+            <button disabled={boolForSimulate} onClick={()=>setX(1)} >Prioritário</button>
+            <button disabled={boolForSimulate} onClick={()=>setX(2)} >Igualitário</button>
     </div>
       </form>
 	  <h1 className="totalTime-lot">
