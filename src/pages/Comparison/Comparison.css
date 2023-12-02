@@ -1,0 +1,181 @@
+.element{
+    background: #ccc;
+    margin: 10px;
+}
+
+.element-container {
+    margin-top: 180px;
+}
+
+.text {
+    position: absolute;
+    top: 1.5rem;
+    left: 1.81rem;
+    color: #000;
+}
+
+.compare-first-in-first {
+    position: absolute;
+    top: calc(50% - 450px);
+    left: calc(50% - 720px);
+    font-size: 2.75rem;
+    line-height: 160%;
+    font-weight: 600;
+    text-align: center;
+    display: inline-block;
+    width: 90rem;
+    height: 8.94rem;
+    background-color: #292738;
+}
+
+.compare-page {
+    position: absolute;
+    background-color: #000;
+    width: 8.75rem;
+    height: 4rem;
+    transition: background-color 0.2s, transform 0.2s;
+}
+
+.compare-page-child {
+    position: absolute;
+    top: 1rem;
+    left: 1.81rem;
+    border-radius: 40px;
+    background-color: #000;
+    width: 8.75rem;
+    height: 4rem;
+    transition: background-color 0.2s, transform 0.2s;
+}
+.compare-page-child:hover {
+    background-color: #000;
+    transform: scale(1.05);
+
+}
+.compare-vector-icon {
+    position: absolute;
+    height: 3.13%;
+    width: 2.08%;
+    top: 3.78%;
+    right: 92.08%;
+    bottom: 93.1%;
+    left: 5.83%;
+    max-width: 100%;
+    overflow: hidden;
+    max-height: 100%;
+
+}
+.frame-icon {
+    position: relative;
+    width: 1.81rem;
+    height: 1.75rem;
+    overflow: hidden;
+    flex-shrink: 0;
+
+}
+.compare-comparar {
+    position: relative;
+    line-height: 125%;
+    font-weight: 600;
+    text-decoration: none;
+    color: #ffffff;
+}
+
+.frame-parentcompare {
+    position: absolute;
+    box-shadow: 3px 4px 26px rgba(0, 0, 0, 0.25);
+    overflow: hidden;
+    padding: var(--padding-10xl) var(--padding-29xl);
+    top: 110%;
+    left: 38%;
+    border-radius: 8px;
+    background-color: #16a34a;
+    width: 6.56rem;
+    height: .02rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    font-size: 1rem;
+    transition: background-color 0.2s, transform 0.2s;
+}
+
+.frame-parentcompare:hover {
+    background-color: var(--tailwind-green-600);
+    transform: scale(1.05);
+}
+
+.compare-page {
+    background-color: #292738;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    text-align: justify;
+    font-size: 0.75rem;
+    color: #fff;
+    font-family: Inter;
+}
+
+table {
+    width: 70%;
+    height: 40%;
+    margin: 240px auto;
+    border-collapse: collapse;
+    background-color: #292738;
+    color: #fff;
+
+}
+
+th, td {
+    padding: 12px;
+    text-align: center;
+    border: 1px solid #ccc;
+    font-size: large;
+}
+
+th {
+    font-size: x-large;
+    background-color: #16a34a;
+    color: #fff;
+
+}
+
+tbody tr:nth-child(even) {
+    background-color: #444;
+
+}
+
+tbody tr:hover {
+    background-color: #333;
+}
+
+.frame-parentclear {
+    position: absolute;
+    box-shadow: 3px 4px 26px rgba(0, 0, 0, 0.25);
+    overflow: hidden;
+    padding: var(--padding-10xl) var(--padding-29xl);
+    top: 110%;
+    left: 52%;
+    border-radius: 8px;
+    background-color: #bd0101;
+    width: 6.56rem;
+    height: .02rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    font-size: 1rem;
+    transition: background-color 0.2s, transform 0.2s;
+}
+
+.frame-parentclear:hover {
+    background-color: #bd0101;
+    transform: scale(1.05);
+}
+
+.clear-button {
+    position: relative;
+    line-height: 125%;
+    font-weight: 600;
+    text-decoration: none;
+    color: #ffffff;
+}

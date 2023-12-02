@@ -8,6 +8,7 @@ import SJF from "./images/SJF.svg"
 import Priority from "./images/priority.svg"
 import FairShare from "./images/fairshare.svg";
 
+
 const Home = () => {
     return (
         <div className="home">
@@ -43,7 +44,7 @@ const Home = () => {
             </div>
             <div className="frame-parent3">
                 <div className="first-in-first-out-wrapper">
-                    <div className="first-in-first">Shorted Job First</div>
+                    <div className="first-in-first">Shortest Job First</div>
                 </div>
                 <img className="image-2-icon" alt="" src={SJF} />
 
@@ -88,6 +89,15 @@ const Home = () => {
             <div className="home-child" />
             <div className="title">
                 Escolha o escalonador que deseja simular
+            </div>
+            <div>
+                <Link to="/compareAll" className="compare">
+
+                    <div className="frame-group-compare">
+                        <img width="40" height="30" src="https://img.icons8.com/ios-glyphs/30/FFFFFF/compare.png" alt="compare"/>
+                        Comparação entre escalonadores
+                    </div>
+                </Link>
             </div>
         </div>
     );
