@@ -103,11 +103,21 @@ const CompareSchedulers = () => {
         }
     };
 
-    const formatAlgorithmName = (name) => {
-        // Transforma "shortestJobFirst" em "Shortest Job First"
-        return name
-            .replace(/([A-Z])/g, ' $1') // Adiciona espaços antes de cada letra maiúscula
-            .replace(/^./, (str) => str.toUpperCase()); // Converte a primeira letra para maiúscula
+    const mapAlgorithmNames = (algorithmType) => {
+        switch (algorithmType) {
+            case 'fifo':
+                return 'First In First Out (FIFO)';
+            case 'fairShare':
+                return 'Fair Share';
+            case 'priorityQueues':
+                return 'Fila de Prioridade';
+            case 'shortestJobFirst':
+                return 'Shortest Job First ';
+            case 'lottery':
+                return 'Loteria';
+            default:
+                return algorithmType;
+        }
     };
 
     const handleClear = () => {
@@ -262,7 +272,7 @@ const CompareSchedulers = () => {
                         <tr key={index}>
                         <td> {index + 1}º</td>
                         <td>{item.fullTimeInExecution}</td>
-                            <td>{formatAlgorithmName(item.type)}</td>
+                            <td>{mapAlgorithmNames(item.type)}</td>
                         </tr>
                     ))}
                     </tbody>
