@@ -43,7 +43,7 @@ const Home = () => {
             </div>
             <div className="frame-parent3">
                 <div className="first-in-first-out-wrapper">
-                    <div className="first-in-first">Shorted Job First</div>
+                    <div className="first-in-first">Shortest Job First</div>
                 </div>
                 <img className="image-2-icon" alt="" src={SJF} />
 

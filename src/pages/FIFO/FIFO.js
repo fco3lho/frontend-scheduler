@@ -21,7 +21,7 @@ const FifoScheduler = () => {
 
   //Form
   const [from_value, setFrom_value] = useState(10);
-  const [to_value, setTo_value] = useState(20);
+  const [to_value, setTo_value] = useState(30);
   const [cpu_weigth, setCpu_weigth] = useState(0.7);
   const [memory_weigth, setMemory_weigth] = useState(0.6);
   const [io_weight, setIo_weight] = useState(0.5);
@@ -163,8 +163,26 @@ const FifoScheduler = () => {
     }
   }, [boolForSimulate === true]);
 
+  const copyToClipboard = (text) => {
+    const textarea = document.createElement("textarea");
+    textarea.value = text;
+    document.body.appendChild(textarea);
+    textarea.select();
+    document.execCommand("copy");
+    document.body.removeChild(textarea);
+  };
+
+  const copyDataToClipboard = () => {
+    if (simulation) {
+      copyToClipboard(JSON.stringify(simulation, null, 2));
+    }
+  };
+
   return (
     <div className="schedule-page-FIFO">
+      <button className="copy-button" onClick={copyDataToClipboard} disabled={!simulation || boolForSimulate}>
+        Copiar script de execução
+      </button>
       <div className="text" />
       <div className="schedule-first-in-first-FIFO">First In First Out</div>
       <Link to="/">

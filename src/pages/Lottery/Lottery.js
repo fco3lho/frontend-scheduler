@@ -22,10 +22,10 @@ const Lottery = () => {
 
         //Form
         const [from_value, setFrom_value] = useState(10);
-        const [to_value, setTo_value] = useState(20);
-        const [cpu_weigth, setCpu_weigth] = useState(0.5);
-        const [memory_weigth, setMemory_weigth] = useState(0.3);
-        const [io_weight, setIo_weight] = useState(0.2);
+        const [to_value, setTo_value] = useState(30);
+        const [cpu_weigth, setCpu_weigth] = useState(0.7);
+        const [memory_weigth, setMemory_weigth] = useState(0.6);
+        const [io_weight, setIo_weight] = useState(0.5);
 		const [lottery_type, setLottery_type] = useState(['random', 'priority', 'equal']);
     const [dataset, setDataset] = useState(0);
         const [x, setX] = useState(0);
@@ -166,9 +166,28 @@ const Lottery = () => {
             })();
           }
         }, [boolForSimulate === true]);
+
+  const copyToClipboard = (text) => {
+    const textarea = document.createElement("textarea");
+    textarea.value = text;
+    document.body.appendChild(textarea);
+    textarea.select();
+    document.execCommand("copy");
+    document.body.removeChild(textarea);
+  };
+
+  const copyDataToClipboard = () => {
+    if (simulation) {
+      copyToClipboard(JSON.stringify(simulation, null, 2));
+    }
+  };
       
   return (
       <div className="schedule-page-lot">
+        <button className="copy-button" onClick={copyDataToClipboard} disabled={!simulation || boolForSimulate}>
+          Copiar script de execução
+        </button>
+        
           <div className="text" />
           <div className="schedule-lot">Loteria</div>
           <Link to="/">

@@ -149,3 +149,11 @@
   color: #fff;
   font-family: Inter;
 }
+
+.copy-button{
+  position: relative;
+  top: 32.5em;
+  left: 56.5rem;
+  padding: 0.5em;
+  width: 5%;
+}
