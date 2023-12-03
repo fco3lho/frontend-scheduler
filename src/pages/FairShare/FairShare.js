@@ -74,7 +74,7 @@ const FairShare = () => {
 
     arrayProcesses[simulation[index].processID - 1].quantum =
       simulation[index].quantum;
-    
+
     arrayProcesses[simulation[index].processID - 1].user_id =
       simulation[index].user_id;
 
@@ -112,6 +112,21 @@ const FairShare = () => {
 
     await sleep(100);
     setBoolForSimulate(true);
+  };
+
+  const copyToClipboard = (text) => {
+    const textarea = document.createElement("textarea");
+    textarea.value = text;
+    document.body.appendChild(textarea);
+    textarea.select();
+    document.execCommand("copy");
+    document.body.removeChild(textarea);
+  };
+
+  const copyDataToClipboard = () => {
+    if (simulation) {
+      copyToClipboard(JSON.stringify(simulation, null, 2));
+    }
   };
 
   // ______________________useEffects______________________
@@ -167,27 +182,8 @@ const FairShare = () => {
     }
   }, [boolForSimulate === true]);
 
-  const copyToClipboard = (text) => {
-    const textarea = document.createElement("textarea");
-    textarea.value = text;
-    document.body.appendChild(textarea);
-    textarea.select();
-    document.execCommand("copy");
-    document.body.removeChild(textarea);
-  };
-
-  const copyDataToClipboard = () => {
-    if (simulation) {
-      copyToClipboard(JSON.stringify(simulation, null, 2));
-    }
-  };
-
   return (
     <div className="schedule-page-FS">
-      <button className="copy-button" onClick={copyDataToClipboard} disabled={!simulation || boolForSimulate}>
-        Copiar script de execução
-      </button>
-
       <div className="text" />
       <div className="schedule-first-in-first-FS">Fair Share</div>
       <Link to="/">
@@ -301,7 +297,7 @@ const FairShare = () => {
         <button disabled={boolForSimulate}>Escalonar</button>
       </form>
       <button
-        className="clean_button"
+        className="clean_button_FS"
         disabled={boolForSimulate}
         onClick={() => {
           setSelectedProcess(-1);
@@ -309,6 +305,13 @@ const FairShare = () => {
         }}
       >
         Limpar
+      </button>
+      <button
+        className="copy_button_FS"
+        onClick={copyDataToClipboard}
+        disabled={!simulation || boolForSimulate}
+      >
+        Copiar script de execução
       </button>
 
       <h1 className="totalTime-FS">

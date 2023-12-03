@@ -111,6 +111,21 @@ const FifoScheduler = () => {
     setBoolForSimulate(true);
   };
 
+  const copyToClipboard = (text) => {
+    const textarea = document.createElement("textarea");
+    textarea.value = text;
+    document.body.appendChild(textarea);
+    textarea.select();
+    document.execCommand("copy");
+    document.body.removeChild(textarea);
+  };
+
+  const copyDataToClipboard = () => {
+    if (simulation) {
+      copyToClipboard(JSON.stringify(simulation, null, 2));
+    }
+  };
+
   // ______________________useEffects______________________
 
   useEffect(() => {
@@ -163,26 +178,9 @@ const FifoScheduler = () => {
     }
   }, [boolForSimulate === true]);
 
-  const copyToClipboard = (text) => {
-    const textarea = document.createElement("textarea");
-    textarea.value = text;
-    document.body.appendChild(textarea);
-    textarea.select();
-    document.execCommand("copy");
-    document.body.removeChild(textarea);
-  };
-
-  const copyDataToClipboard = () => {
-    if (simulation) {
-      copyToClipboard(JSON.stringify(simulation, null, 2));
-    }
-  };
-
   return (
     <div className="schedule-page-FIFO">
-      <button className="copy-button" onClick={copyDataToClipboard} disabled={!simulation || boolForSimulate}>
-        Copiar script de execução
-      </button>
+      
       <div className="text" />
       <div className="schedule-first-in-first-FIFO">First In First Out</div>
       <Link to="/">
@@ -296,7 +294,7 @@ const FifoScheduler = () => {
         <button disabled={boolForSimulate}>Escalonar</button>
       </form>
       <button
-        className="clean_button"
+        className="clean_button_FIFO"
         disabled={boolForSimulate}
         onClick={() => {
           setSelectedProcess(-1);
@@ -304,6 +302,9 @@ const FifoScheduler = () => {
         }}
       >
         Limpar
+      </button>
+      <button className="copy_button_FIFO" onClick={copyDataToClipboard} disabled={!simulation || boolForSimulate}>
+        Copiar script de execução
       </button>
 
       <h1 className="totalTime-FIFO">
