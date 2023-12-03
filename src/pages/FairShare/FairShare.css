@@ -25,14 +25,6 @@
   padding: 10px;
 }
 
-.schedule_form_FS button{
-  position: relative;
-  left: 53rem;
-  padding: 0.5em;
-  margin-top: 1em;
-  width: 5%;
-}
-
 .schedule_dataset{
   position: absolute;
   top: -3em;
@@ -42,12 +34,28 @@
   align-items: center;
 }
 
-.clean_button{
+.schedule_form_FS button{
   position: relative;
-  top: 6.81em;
-  left: 60rem;
+  left: 45.5rem;
+  padding: 0.5em;
+  margin-top: 1em;
+  width: 5%;
+}
+
+.clean_button_FS{
+  position: relative;
+  top: 6.85em;
+  left: 52.5rem;
   padding: 0.5em;
   width: 5%;
+}
+
+.copy_button_FS{
+  position: relative;
+  top: 6.85em;
+  left: 53.5rem;
+  padding: 0.5em;
+  width: 10%;
 }
 
 .text {

@@ -177,3 +177,11 @@
   flex-grow: 1; /* Isso fará com que os botões ocupem o espaço disponível */
   margin:  5px; /* Isso adicionará espaço entre os botões */
 }
+
+.copy-button{
+  position: relative;
+  top: 32.5em;
+  left: 56.5rem;
+  padding: 0.5em;
+  width: 5%;
+}

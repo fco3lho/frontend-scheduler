@@ -1,4 +1,5 @@
 import "../FIFO/FIFO.css";
+import "./PriorityQueues.css";
 import homeIcon from "../FIFO/vector.svg";
 
 //Hooks
@@ -114,6 +115,21 @@ const PriorityQueuesScheduler = () => {
     setBoolForSimulate(true);
   };
 
+  const copyToClipboard = (text) => {
+    const textarea = document.createElement("textarea");
+    textarea.value = text;
+    document.body.appendChild(textarea);
+    textarea.select();
+    document.execCommand("copy");
+    document.body.removeChild(textarea);
+  };
+
+  const copyDataToClipboard = () => {
+    if (simulation) {
+      copyToClipboard(JSON.stringify(simulation, null, 2));
+    }
+  };
+
   // ______________________useEffects______________________
 
   useEffect(() => {
@@ -167,27 +183,8 @@ const PriorityQueuesScheduler = () => {
     }
   }, [boolForSimulate === true]);
 
-  const copyToClipboard = (text) => {
-    const textarea = document.createElement("textarea");
-    textarea.value = text;
-    document.body.appendChild(textarea);
-    textarea.select();
-    document.execCommand("copy");
-    document.body.removeChild(textarea);
-  };
-
-  const copyDataToClipboard = () => {
-    if (simulation) {
-      copyToClipboard(JSON.stringify(simulation, null, 2));
-    }
-  };
-
   return (
     <div className="schedule-page-FIFO">
-      <button className="copy-button" onClick={copyDataToClipboard} disabled={!simulation || boolForSimulate}>
-        Copiar script de execução
-      </button>
-
       <div className="text" />
       <div className="schedule-first-in-first-FIFO">Fila de Prioridade</div>
       <Link to="/">
@@ -301,7 +298,7 @@ const PriorityQueuesScheduler = () => {
         <button disabled={boolForSimulate}>Escalonar</button>
       </form>
       <button
-        className="clean_button"
+        className="clean_button_PQ"
         disabled={boolForSimulate}
         onClick={() => {
           setSelectedProcess(-1);
@@ -309,6 +306,13 @@ const PriorityQueuesScheduler = () => {
         }}
       >
         Limpar
+      </button>
+      <button
+        className="copy_button_PQ"
+        onClick={copyDataToClipboard}
+        disabled={!simulation || boolForSimulate}
+      >
+        Copiar script de execução
       </button>
 
       <h1 className="totalTime-FIFO">
