@@ -13,6 +13,7 @@ import FairShare from "./pages/FairShare/FairShare";
 import Lottery from "./pages/Lottery/Lottery";
 import PriorityQueues from "./pages/PriorityQueues/PriorityQueues";
 import ShortestJobFirst from "./pages/ShortestJobFirst/ShortestJobFirst";
+import CompareAll from "./pages/Comparison/Comparison"
 
 const App = () => {
   return (
@@ -25,6 +26,7 @@ const App = () => {
           <Route path="/lottery" element={<Lottery />} />
           <Route path="/priorityQueues" element={<PriorityQueues />} />
           <Route path="/shortestJobFirst" element={<ShortestJobFirst />} />
+          <Route path="/compareAll" element={<CompareAll />} />
         </Routes>
       </div>
     </BrowserRouter>
